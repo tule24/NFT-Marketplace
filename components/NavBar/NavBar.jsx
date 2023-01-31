@@ -4,7 +4,7 @@ import Link from 'next/link'
 // IMPORT ICON
 import { MdNotifications } from 'react-icons/md'
 import { BsSearch } from 'react-icons/bs'
-import { CgMenuLeft, CgMenuRight } from 'react-icons/cg'
+import { CgMenuRight } from 'react-icons/cg'
 // INTERNAL IMPORT
 import Style from './NavBar.module.css'
 import { Discover, HelpCenter, Notification, Profile, SideBar } from './index'
