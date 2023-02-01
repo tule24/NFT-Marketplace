@@ -27,10 +27,6 @@
     height: 600px;
 }
 
-.heroIcon {
-    font-size: 35px;
-}
-
 @media screen and (max-width: 1350px) {
     .heroSection {
         width: 85%;
