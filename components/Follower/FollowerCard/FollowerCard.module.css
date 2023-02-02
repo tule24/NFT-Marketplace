@@ -1,0 +1,90 @@
+.followerCard_box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: var(--main-bg-color);
+    border-radius: 2rem;
+    transition: all .2s ease-in;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid var(--shadow-dark-color);
+}
+.followerCard_box:hover {
+    box-shadow: var(--box-shadow);
+}
+.followerCard_rank {
+    position: absolute;
+    z-index: 555;
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
+    line-height: 0;
+    margin: 1rem;
+    font-size: .8rem;
+    padding: .1rem .5rem;
+    border-radius: 2rem;
+    border: 1px solid var(--icons-color);
+    transition: all .2s ease-in;
+}
+.followerCard_rank:hover {
+    background-color: var(--main-bg-color);
+    color: var(--icons-color);
+}
+.followerCard_box_img {
+    grid-column: 1 / -1;
+}
+.followerCard_box_img_img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+}
+.followerCard_box_profile {
+    grid-column: 1/-1;
+    text-align: center;
+    margin-top: -2rem;
+    position: relative;
+}
+
+.followerCard_box_profile_img {
+    border-radius: 50%;
+    position: relative;
+    z-index: 999;
+}
+
+.followerCard_box_profile::before {
+    position: absolute;
+    content: "";
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: var(--main-bg-color);
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.followerCard_box_info {
+    grid-column: 1/-1;
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    justify-content: space-between;
+    margin-top: -1rem;
+    padding-inline: 1rem;
+    padding-bottom: 1rem;
+}
+
+.followerCard_box_info h4 {
+    font-size: 1rem;
+    line-height: 0;
+}
+
+.followerCard_box_info_following a {
+    background-color: var(--shadow-dark-color);
+    padding: .7rem 1.5rem;
+    border-radius: 2rem;
+    border: 1px solid var(--shadow-dark-color);
+    transition: all .2s ease-in;
+}
+
+.followerCard_box_info_following a:hover {
+    background-color: transparent;
+}
