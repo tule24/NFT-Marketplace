@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: space-between;
     padding-bottom: 4rem;
+    flex-wrap: wrap;
 }
 
 .filter_box_left {
