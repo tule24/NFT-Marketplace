@@ -8,5 +8,6 @@ import Subscribe from './Subscribe/Subscribe'
 import Title from './Title/Title'
 import Category from './Category/Category'
 import Filter from './Filter/Filter'
+import NFTCard from './Card/Card'
 
-export { Button, Footer, NavBar, HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter }
+export { Button, Footer, NavBar, HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter, NFTCard }
