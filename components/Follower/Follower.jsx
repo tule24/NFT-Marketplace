@@ -12,7 +12,7 @@ const Follower = () => {
     return (
         <div className={Style.follower}>
             <div className={Style.follower_title}>
-                <h2>Top Creators List..</h2>
+                <h2>Top List Creators</h2>
                 <div className={Style.follower_tabs}>
                     <div className={Style.follower_tabs_btn}>
                         <button onClick={() => setTabCollection('popular')}>
