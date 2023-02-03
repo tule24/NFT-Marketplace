@@ -11,5 +11,6 @@ import Filter from './Filter/Filter'
 import NFTCard from './Card/Card'
 import Collection from './Collection/Collection'
 import Follower from './Follower/Follower'
-
-export { Button, Footer, NavBar, HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter, NFTCard, Collection, Follower }
+import AudioLive from './AudioLive/AudioLive'
+import LikeProfile from './LikeProfile/LikeProfile'
+export { Button, Footer, NavBar, HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter, NFTCard, Collection, Follower, AudioLive, LikeProfile }
