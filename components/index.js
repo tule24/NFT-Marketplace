@@ -13,5 +13,5 @@ import Collection from './Collection/Collection'
 import Follower from './Follower/Follower'
 import AudioLive from './AudioLive/AudioLive'
 import LikeProfile from './LikeProfile/LikeProfile'
-import Slider from './Slider/Slider'
-export { Button, Footer, NavBar, HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter, NFTCard, Collection, Follower, AudioLive, LikeProfile, Slider }
+import NFTSlider from './NFTSlider/NFTSlider'
+export { Button, Footer, NavBar, HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter, NFTCard, Collection, Follower, AudioLive, LikeProfile, NFTSlider }

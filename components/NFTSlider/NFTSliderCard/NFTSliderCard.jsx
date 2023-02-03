@@ -1,11 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 //INTERNAL IMPORT
-import Style from './SliderCard.module.css'
+import Style from './NFTSliderCard.module.css'
 import images from '../../../img'
 import LikeProfile from '../../LikeProfile/LikeProfile'
 
-const SliderCard = ({i}) => {
+const NFTSliderCard = ({i}) => {
   return (
     <div className={Style.sliderCard}>
         <div className={Style.sliderCard_box}>
@@ -34,4 +34,4 @@ const SliderCard = ({i}) => {
   )
 }
 
-export default SliderCard
+export default NFTSliderCard

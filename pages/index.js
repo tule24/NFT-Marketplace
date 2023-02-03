@@ -1,8 +1,7 @@
 import React from 'react'
-
 // INTERNAL IMPORT
 import Style from '../styles/Home.module.css'
-import { HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter, NFTCard, Collection, Follower, AudioLive, Slider } from '../components'
+import { HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter, NFTCard, Collection, Follower, AudioLive, NFTSlider } from '../components'
 
 const Home = () => {
   return (
@@ -13,7 +12,7 @@ const Home = () => {
       <Title heading="Audio Collection" paragraph="Discover the most outstanding NFTs in all topics of life."/>
       <AudioLive />
       <Follower />
-      <Slider />
+      <NFTSlider />
       <Collection />
       <Title heading="Featured NFTs" paragraph="Discover the most outstanding NFTs in all topics of life."/>
       <Filter />
