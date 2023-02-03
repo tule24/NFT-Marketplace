@@ -17,10 +17,10 @@ const FollowerCard = ({ i, ele }) => {
             </div>
             <div className={Style.followerCard_box}>
                 <div className={Style.followerCard_box_img}>
-                    <Image src={images.creatorbackground1} alt="profile background" className={Style.followerCard_box_img_img} />
+                    <Image src={images[`creatorbackground${i+1}`]} alt="profile background" className={Style.followerCard_box_img_img} />
                 </div>
                 <div className={Style.followerCard_box_profile}>
-                    <Image src={images.user1} alt="ava" width={50} height={50} className={Style.followerCard_box_profile_img} />
+                    <Image src={images[`user${i+1}`]} alt="ava" width={50} height={50} className={Style.followerCard_box_profile_img} />
                 </div>
                 <div className={Style.followerCard_box_info}>
                     <div className={Style.followerCard_box_info_name}>

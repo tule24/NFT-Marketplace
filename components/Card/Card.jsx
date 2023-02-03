@@ -16,7 +16,7 @@ const Card = () => {
             {CardArray.map((el, i) => (
                 <div className={Style.card_box} key={i}>
                     <div className={Style.card_box_item}>
-                        <Image src={images.nft_image_1} alt="NFT images" className={Style.card_box_item_img}/>
+                        <Image src={images[`nft_image_${(i+1)%3 + 1}`]} alt="NFT images" className={Style.card_box_item_img}/>
                     </div>
                     <div className={Style.card_box_update}>
                         <div className={Style.card_box_update_left}>

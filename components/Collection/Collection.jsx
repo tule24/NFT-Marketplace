@@ -34,7 +34,7 @@ const Collection = () => {
                 tabCollection === 'popular' && (
                     <div className={Style.collection_box}>
                         {cardArray.map((ele, i) => (
-                            <DaysComponent key={i} />
+                            <DaysComponent key={i} i={i}/>
                         ))}
                     </div>
                 )
@@ -43,7 +43,7 @@ const Collection = () => {
                 tabCollection === 'following' && (
                     <div className={Style.collection_box}>
                         {followingArray.map((ele, i) => (
-                            <DaysComponent key={i} />
+                            <DaysComponent key={i} i={i}/>
                         ))}
                     </div>
                 )
@@ -52,7 +52,7 @@ const Collection = () => {
                 tabCollection === 'news' && (
                     <div className={Style.collection_box}>
                         {newsArray.map((ele, i) => (
-                            <DaysComponent key={i} />
+                            <DaysComponent key={i} i={i}/>
                         ))}
                     </div>
                 )
