@@ -1,0 +1,55 @@
+.brand {
+    width: 100%;
+    margin-top: 5rem;
+    margin-bottom: 7rem;
+}
+
+.brand_box {
+    width: 80%;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.brand_box_left h1 {
+    font-size: 5rem;
+    line-height: 1.2;
+    font-weight: bolder;
+}
+
+.brand_box_left p {
+    font-size: 1.3rem;
+    margin-top: -2rem;
+}
+
+.brand_box_left_btn {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+.brand_box_right_img {
+    width: 100%;
+    height: 100%;
+}
+@media screen and (min-width: 541px) and (max-width: 928px) {
+    .brand_box_left h1 {
+        font-size: 3rem;
+    }
+}
+@media screen and (max-width: 540px) {
+    .brand_box {
+        grid-template-columns: 1fr;
+    }
+
+    .brand_box_left h1 {
+        font-size: 2.5rem;
+    }
+
+    .brand_box_left p {
+        margin-top: -.5rem;
+    }
+}
