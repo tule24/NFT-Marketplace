@@ -11,7 +11,7 @@ const Category = () => {
             <div className={Style.category_box}>
             {CategoryArray.map((ele, i) => (
                 <div className={Style.category_box_item} key={i}>
-                    <Image src={images[`creatorbackground${i+1}`]} className={Style.category_box_img} alt="Background image" width={350} height={150} />
+                    <Image src={images[`creatorbackground${i+1}`]} className={Style.category_box_img} alt="Background image"/>
                     <div className={Style.category_box_title}>
                         <span>
                             <BsCircleFill />

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { GrClose } from 'react-icons/gr'
-import { TiSocialFacebook, TiSocialLinkedin, TiSocialTwitter, TiSocialYoutube, TiSocialInstagram, TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti'
+import { TiSocialFacebook, TiSocialLinkedin, TiSocialTwitter, TiSocialYoutube, TiSocialInstagram, TiArrowSortedDown } from 'react-icons/ti'
 // INTERNAL IMPORT
 import Style from './SideBar.module.css'
 import images from '../../../img'
@@ -40,19 +40,19 @@ const SideBar = ({ setOpenSideMenu }) => {
           Discover the most outstanding articles on all topices of NFT & write your own stories and share them
         </p>
         <div className={Style.sideBar_social}>
-          <a href="#" className='fb'>
+          <a href="#">
             <TiSocialFacebook />
           </a>
-          <a href="#" className='linked'>
+          <a href="#">
             <TiSocialLinkedin />
           </a>
-          <a href="#" className='twitter'>
+          <a href="#">
             <TiSocialTwitter />
           </a>
-          <a href="#" className='youtube'>
+          <a href="#">
             <TiSocialYoutube />
           </a>
-          <a href="#" className='instagram'>
+          <a href="#">
             <TiSocialInstagram />
           </a>
         </div>

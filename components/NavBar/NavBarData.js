@@ -12,8 +12,8 @@ const discover = [
         link: "author"
     },
     {
-        name: "NFT Details",
-        link: "nft-details"
+        name: "NFT Detail",
+        link: "nftDetail"
     },
     {
         name: "Account Setting",

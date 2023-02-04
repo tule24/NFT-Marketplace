@@ -1,0 +1,22 @@
+.nftDetailPage {
+    width: 100%;
+    margin-block: 5rem;
+}
+
+.nftDetailPage_box {
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+}
+
+@media screen and (max-width: 768px) {
+    .nftDetailPage {
+        margin-block: 2rem;
+    }
+    .nftDetailPage_box {
+        width: 90%;
+        grid-template-columns: 1fr;
+    }
+}
