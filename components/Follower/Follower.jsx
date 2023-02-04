@@ -31,33 +31,9 @@ const Follower = () => {
                     </div>
                 </div>
             </div>
-            {
-                tabFollower === 'popular' && (
-                    <div className={Style.follower_box}>
-                        {cardArray.map((ele, i) => (
-                            <FollowerCard key={i} i={i} el={ele} />
-                        ))}
-                    </div>
-                )
-            }
-            {
-                tabFollower === 'following' && (
-                    <div className={Style.follower_box}>
-                        {followingArray.map((ele, i) => (
-                            <FollowerCard key={i} i={i} el={ele} />
-                        ))}
-                    </div>
-                )
-            }
-            {
-                tabFollower === 'news' && (
-                    <div className={Style.follower_box}>
-                        {newsArray.map((ele, i) => (
-                            <FollowerCard key={i} i={i} el={ele} />
-                        ))}
-                    </div>
-                )
-            }
+            {tabFollower === 'popular' && <FollowerCard cardData={cardArray} />}
+            {tabFollower === 'following' && <FollowerCard cardData={followingArray} /> }
+            {tabFollower === 'news' && <FollowerCard cardData={newsArray} />}
             <div className={Style.follower_member}>
                 <div className={Style.follower_member_box}>
                     <a href="#">Show me more</a>

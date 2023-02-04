@@ -1,3 +1,11 @@
+.follower_box {
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
 .followerCard_box {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -87,4 +95,18 @@
 
 .followerCard_box_info_following a:hover {
     background-color: transparent;
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .follower_box {
+        width: 90%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-device-width: 320px) and (max-device-width: 425px) {
+    .follower_box {
+        width: 90%;
+        grid-template-columns: 1fr;
+    }
 }

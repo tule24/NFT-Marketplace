@@ -50,13 +50,6 @@
     color: var(--icons-color);
 }
 
-.follower_box {
-    width: 80%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-}
 .follower_member {
     width: 100%;
     display: flex;
@@ -97,10 +90,7 @@
     .follower_title h2 {
         font-size: 3rem;
     }
-    .follower_box {
-        width: 90%;
-        grid-template-columns: repeat(2, 1fr);
-    }
+    
 }
 
 @media screen and (min-device-width: 426px) and (max-device-width: 767px) {
@@ -120,10 +110,7 @@
     .follower {
         padding-block: 6rem;
     }
-    .follower_box {
-        width: 90%;
-        grid-template-columns: 1fr;
-    }
+    
     .follower_title {
         width: 90%;
     }
