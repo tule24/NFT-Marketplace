@@ -10,7 +10,7 @@ const AccountForm = () => {
         <div className={Style.accountForm}>
             <div className={Style.accountForm_box}>
                 <form>
-                    <div className={Style.accountForm_box}>
+                    <div className={Style.accountForm_box_input}>
                         <label htmlFor="name">Username</label>
                         <input type="text" placeholder='shoaib bhai' className={Style.accountForm_box_input_username} required/>
                     </div>
