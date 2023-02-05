@@ -44,7 +44,18 @@ import update from "./update.png";
 import earn from "./earn.png"
 import nftVideo from './nftvideo.png'
 import upload from './upload.png'
+import hero2 from './hero2.png'
+import founder1 from './founder1.jpg'
+import founder2 from './founder2.jpg'
+import founder3 from './founder3.jpg'
+import founder4 from './founder4.jpg'
+
 export default {
+  founder1,
+  founder2,
+  founder3,
+  founder4,
+  hero2,
   upload,
   nftVideo,
   earn,
