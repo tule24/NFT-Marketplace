@@ -40,7 +40,7 @@ const helpCenter = [
     },
     {
         name: "Contact Us",
-        link: "contact-us"
+        link: "contact"
     },
     {
         name: "Sign Up",

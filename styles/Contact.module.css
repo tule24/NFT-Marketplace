@@ -1,0 +1,82 @@
+.contact {
+    width: 100%;
+}
+
+.contact_box {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.contact_box h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+.contact_box_box {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: center;
+    align-self: flex-start;
+    margin-bottom: 10rem;
+}
+
+.contact_box_box_left_item {
+    margin-bottom: 3rem;
+}
+
+.contact_box_box_left_item h3 {
+    margin-bottom: 0;
+}
+
+.contact_box_box_left_item p{
+    line-height: 1.2;
+    width: 80%;
+    font-size: 1rem;
+    margin-top: 0;
+}
+
+.contact_box_box_left_item a {
+    font-size: 1.5rem;
+    border-radius: 50%;
+    padding: .3rem;
+}
+
+.button {
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .contact_box {
+        width: 90%;
+    }
+    .contact_box_box {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .contact_box_box_left {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .contact_box_box_left_item p {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .contact_box {
+        width: 90%;
+    }
+    .contact_box_box {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .contact_box_box_left {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .contact_box_box_left_item p {
+        width: 100%;
+    }
+} 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 // INTERNAL IMPORT
 import Style from '../styles/Author.module.css'
-import { Banner, NFTCardTwo } from '../collectionComps'
+import { Banner } from '../collectionComps'
 import { Brand, Title } from '../components'
 import { AuthorTaps, AuthorProfileCard, AuthorNFTCardBox } from '../authorComps'
 import images from '../img'

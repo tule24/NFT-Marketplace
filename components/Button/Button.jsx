@@ -5,7 +5,7 @@ const Button = ({ btnName, handleClick, icon, classStyle }) => {
   return (
     <div className={Style.box}>
       <button className={`${Style.button} ${classStyle}`} onClick={() => handleClick}>
-        {icon} &nbsp; {btnName}
+        {icon}{btnName}
       </button>
     </div>
   )
