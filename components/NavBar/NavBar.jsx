@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 // IMPORT ICON
@@ -11,6 +11,7 @@ import Style from './NavBar.module.css'
 import { Discover, HelpCenter, Notification, Profile, SideBar } from './index'
 import { Button } from '../index'
 import images from '../../img'
+import { NFTMarketplaceContext } from '../../Context/NFTMarketplaceContext'
 
 const NavBar = () => {
   const [discover, setDiscover] = useState(false)
@@ -19,6 +20,7 @@ const NavBar = () => {
   const [profile, setProfile] = useState(false)
   const [openSideMenu, setOpenSideMenu] = useState(false)
   const { theme, setTheme } = useTheme()
+  const { connectWallet, currentAccount } = useContext(NFTMarketplaceContext)
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
@@ -117,14 +119,17 @@ const NavBar = () => {
           </div>
           {/* CREATE BUTTON SECTION */}
           <div className={Style.navbar_container_right_button}>
-            <Button btnName="Create" handleClick={() => { }} />
+            {currentAccount ? (
+              <a href="/uploadNFT">
+                <Button btnName="Create" handleClick={() => {}} /></a>
+            ) : <Button btnName="Connect" handleClick={connectWallet} />}
           </div>
           {/* BUTTON CHANGE THEME */}
           <div className={Style.navbar_container_theme_button}>
-            <input type="checkbox" id="theme" class={Style.navbar_container_theme_button_checkbox} onChange={() => changeTheme()} />
-            <label for="theme" class={Style.navbar_container_theme_button_label}>
-              <CiLight class={Style.navbar_container_theme_button_light} />
-              <CiDark class={Style.navbar_container_theme_button_dark} />
+            <input type="checkbox" id="theme" className={Style.navbar_container_theme_button_checkbox} onChange={() => changeTheme()} />
+            <label htmlFor="theme" className={Style.navbar_container_theme_button_label}>
+              <CiLight className={Style.navbar_container_theme_button_light} />
+              <CiDark className={Style.navbar_container_theme_button_dark} />
             </label>
           </div>
           {/* USER PROFILE */}
@@ -143,13 +148,13 @@ const NavBar = () => {
       {/* SIDEBAR COMPONENT */}
       {
         openSideMenu && (
-          <div className={Style.sideBar}> 
+          <div className={Style.sideBar}>
             <SideBar setOpenSideMenu={setOpenSideMenu} />
             <div className={Style.navbar_container_theme_button_sideBar}>
-              <input type="checkbox" id="themeSidebar" class={Style.navbar_container_theme_button_sideBar_checkbox} onChange={() => changeTheme()} />
-              <label for="themeSidebar" class={Style.navbar_container_theme_button_sideBar_label}>
-                <CiLight class={Style.navbar_container_theme_button_sideBar_light} />
-                <CiDark class={Style.navbar_container_theme_button_sideBar_dark} />
+              <input type="checkbox" id="themeSidebar" className={Style.navbar_container_theme_button_sideBar_checkbox} onChange={() => changeTheme()} />
+              <label htmlFor="themeSidebar" className={Style.navbar_container_theme_button_sideBar_label}>
+                <CiLight className={Style.navbar_container_theme_button_sideBar_light} />
+                <CiDark className={Style.navbar_container_theme_button_sideBar_dark} />
               </label>
             </div>
           </div>
