@@ -1,12 +1,13 @@
 import '../styles/globals.css'
+import { ThemeProvider } from 'next-themes'
 // INTERNAL IMPORT
 import { NavBar, Footer } from '../components'
 const MyApp = ({ Component, pageProps }) => (
-    <div>
+    <ThemeProvider>
         <NavBar />
         <Component {...pageProps} />
         <Footer />
-    </div>
+    </ThemeProvider>
 )
 
 export default MyApp

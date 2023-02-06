@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useTheme } from 'next-themes'
 // IMPORT ICON
 import { MdNotifications } from 'react-icons/md'
 import { BsSearch } from 'react-icons/bs'
 import { CgMenuRight } from 'react-icons/cg'
+import { CiLight, CiDark } from 'react-icons/ci'
 // INTERNAL IMPORT
 import Style from './NavBar.module.css'
 import { Discover, HelpCenter, Notification, Profile, SideBar } from './index'
@@ -17,6 +18,7 @@ const NavBar = () => {
   const [notification, setNotification] = useState(false)
   const [profile, setProfile] = useState(false)
   const [openSideMenu, setOpenSideMenu] = useState(false)
+  const { theme, setTheme } = useTheme()
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
@@ -39,7 +41,7 @@ const NavBar = () => {
   }
 
   const openNotification = () => {
-    if(!notification) {
+    if (!notification) {
       setNotification(true);
       setDiscover(false);
       setHelp(false);
@@ -50,7 +52,7 @@ const NavBar = () => {
   }
 
   const openProfile = () => {
-    if(!profile) {
+    if (!profile) {
       setProfile(true);
       setHelp(false);
       setNotification(false);
@@ -61,10 +63,18 @@ const NavBar = () => {
   }
 
   const openSideBar = () => {
-    if(!openSideMenu) {
+    if (!openSideMenu) {
       setOpenSideMenu(true)
     } else {
       setOpenSideMenu(false)
+    }
+  }
+
+  const changeTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark')
+    } else {
+      setTheme('light')
     }
   }
   return (
@@ -102,31 +112,46 @@ const NavBar = () => {
           </div>
           {/* NOTIFICATION */}
           <div className={Style.navbar_container_right_notify}>
-            <MdNotifications className={Style.notify} onClick={() => openNotification()}/>
+            <MdNotifications className={Style.notify} onClick={() => openNotification()} />
             {notification && <Notification />}
           </div>
           {/* CREATE BUTTON SECTION */}
           <div className={Style.navbar_container_right_button}>
-            <Button btnName="Create" handleClick={() => {}}/>
+            <Button btnName="Create" handleClick={() => { }} />
+          </div>
+          {/* BUTTON CHANGE THEME */}
+          <div className={Style.navbar_container_theme_button}>
+            <input type="checkbox" id="theme" class={Style.navbar_container_theme_button_checkbox} onChange={() => changeTheme()} />
+            <label for="theme" class={Style.navbar_container_theme_button_label}>
+              <CiLight class={Style.navbar_container_theme_button_light} />
+              <CiDark class={Style.navbar_container_theme_button_dark} />
+            </label>
           </div>
           {/* USER PROFILE */}
           <div className={Style.navbar_container_right_profile_box}>
             <div className={Style.navbar_container_right_profile}>
-              <Image src={images.user1} alt="Profile" width={40} height="40" className={Style.navbar_container_right_profile} onClick={() => openProfile()}/>
+              <Image src={images.user1} alt="Profile" width={40} height="40" className={Style.navbar_container_right_profile} onClick={() => openProfile()} />
               {profile && <Profile />}
             </div>
           </div>
           {/* MENU BUTTON */}
           <div className={Style.navbar_container_right_menuBtn}>
-            <CgMenuRight className={Style.menuIcon} onClick={() => openSideBar()}/>
+            <CgMenuRight className={Style.menuIcon} onClick={() => openSideBar()} />
           </div>
         </div>
       </div>
       {/* SIDEBAR COMPONENT */}
       {
         openSideMenu && (
-          <div className={Style.sideBar}>
-          <SideBar setOpenSideMenu={setOpenSideMenu} />
+          <div className={Style.sideBar}> 
+            <SideBar setOpenSideMenu={setOpenSideMenu} />
+            <div className={Style.navbar_container_theme_button_sideBar}>
+              <input type="checkbox" id="themeSidebar" class={Style.navbar_container_theme_button_sideBar_checkbox} onChange={() => changeTheme()} />
+              <label for="themeSidebar" class={Style.navbar_container_theme_button_sideBar_label}>
+                <CiLight class={Style.navbar_container_theme_button_sideBar_light} />
+                <CiDark class={Style.navbar_container_theme_button_sideBar_dark} />
+              </label>
+            </div>
           </div>
         )
       }
