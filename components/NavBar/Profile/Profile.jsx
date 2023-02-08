@@ -9,9 +9,11 @@ import { BiUser } from 'react-icons/bi'
 import Style from './Profile.module.css'
 import images from '../../../img'
 import { NFTMarketplaceContext } from '../../../Context/NFTMarketplaceContext'
+import { minifyAddress } from '../../../helpers'
 
 const Profile = () => {
   const { currentAccount } = useContext(NFTMarketplaceContext)
+  const miniAddress = minifyAddress(currentAccount)
   return (
     <div className={Style.profile}>
       {currentAccount ? (
@@ -19,7 +21,7 @@ const Profile = () => {
           <Image src={images.user1} alt="user profile" width={50} height={50} className={Style.profile_account_img} />
           <div className={Style.profile_account_info}>
             <p>User</p>
-            <small>{currentAccount.slice(0, 5) + '...' + currentAccount.slice(currentAccount.length - 3, currentAccount.length)}</small>
+            <small>{miniAddress}</small>
           </div>
         </div>
       ) : (

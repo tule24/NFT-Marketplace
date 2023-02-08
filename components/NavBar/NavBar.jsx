@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Image from 'next/image'
-import { useTheme } from 'next-themes'
 import Link from 'next/link'
+import 'react-toastify/dist/ReactToastify.css';
 // IMPORT ICON
 import { MdNotifications } from 'react-icons/md'
 import { BsSearch } from 'react-icons/bs'
@@ -13,6 +13,7 @@ import { Discover, HelpCenter, Notification, Profile, SideBar } from './index'
 import { Button } from '../index'
 import images from '../../img'
 import { NFTMarketplaceContext } from '../../Context/NFTMarketplaceContext'
+import { ToastContainer } from 'react-toastify'
 
 const NavBar = () => {
   const [discover, setDiscover] = useState(false)
@@ -20,8 +21,7 @@ const NavBar = () => {
   const [notification, setNotification] = useState(false)
   const [profile, setProfile] = useState(false)
   const [openSideMenu, setOpenSideMenu] = useState(false)
-  const { theme, setTheme } = useTheme()
-  const { connectWallet, currentAccount } = useContext(NFTMarketplaceContext)
+  const { connectWallet, currentAccount, setTheme, theme } = useContext(NFTMarketplaceContext)
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
@@ -162,6 +162,7 @@ const NavBar = () => {
           </div>
         )
       }
+      <ToastContainer closeButton={true} theme={theme} />
     </div>
   )
 }

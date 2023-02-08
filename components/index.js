@@ -16,4 +16,5 @@ import LikeProfile from './LikeProfile/LikeProfile'
 import NFTSlider from './NFTSlider/NFTSlider'
 import Brand from './Brand/Brand'
 import Video from './Video/Video'
-export { Button, Footer, NavBar, HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter, NFTCard, Collection, Follower, AudioLive, LikeProfile, NFTSlider, Brand, Video }
+import Loader from './Loader/Loader'
+export { Button, Footer, NavBar, HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter, NFTCard, Collection, Follower, AudioLive, LikeProfile, NFTSlider, Brand, Video, Loader }

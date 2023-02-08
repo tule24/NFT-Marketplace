@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { MdOutlineHttp } from 'react-icons/md'
 import { FaPercent } from 'react-icons/fa'
 import { AiTwotonePropertySafety } from 'react-icons/ai'
@@ -10,8 +10,8 @@ import formStyle from '../accountComps/AccountForm/AccountForm.module.css'
 import { Button } from '../components'
 import { DropZone } from './index'
 import { categoryArr } from './UploadNFTData'
-
-const UploadNFT = ({ mintNFT }) => {
+import { NFTMarketplaceContext } from '../Context/NFTMarketplaceContext'
+const UploadNFT = () => {
   const [active, setActive] = useState(null)
   const [nftData, setNftData] = useState({
     name: "",
@@ -22,26 +22,7 @@ const UploadNFT = ({ mintNFT }) => {
     category: "",
     image: null,
   })
-
-  const storeNFT = async () => {
-    try {
-      const { name, description, image } = nftData
-      const data = new FormData();
-      data.append("name", name);
-      data.append("description", description);
-      data.append("image", image);
-      const response = await fetch("/api/nft-storage", {
-        method: "POST",
-        body: data,
-      });
-      if (response.status === 201) {
-        const json = await response.json()
-        console.log("tokenURI: ", json)
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  const { mintNFT } = useContext(NFTMarketplaceContext)
 
   return (
     <div className={Style.uploadNFT}>
@@ -111,7 +92,7 @@ const UploadNFT = ({ mintNFT }) => {
           </div>
         </div>
         <div className={Style.upload_box_btn}>
-          <Button btnName="Upload" handleClick={async() => await storeNFT()} classStyle={Style.upload_box_btn_style} />
+          <Button btnName="Upload" handleClick={async () => await mintNFT(nftData)} classStyle={Style.upload_box_btn_style} />
           <Button btnName="Preview" handleClick={() => { }} classStyle={Style.upload_box_btn_style} />
         </div>
       </div>

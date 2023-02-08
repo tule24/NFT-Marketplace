@@ -3,7 +3,7 @@ import { readFileSync, unlinkSync } from "fs";
 import { File, NFTStorage } from "nft.storage";
 import { tmpdir } from "os";
 
-const client = new NFTStorage({ token: `${process.env.NFT_STORAGE_KEY}` });
+const client = new NFTStorage({ token: `${process.env.NEXT_PUBLIC_NFT_STORAGE_KEY}` });
 
 const handler = async (req, res) => {
   if (req.method != "POST") {
@@ -38,7 +38,7 @@ const handler = async (req, res) => {
     // Delete tmp image
     unlinkSync(filepath);
     // return tokenURI
-    res.status(201).json({ data: data });
+    res.status(201).json({ uri: metadata.url });
   } catch (e) {
     console.log(e);
     return res.status(400).json(e);
