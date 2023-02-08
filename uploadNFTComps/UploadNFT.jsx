@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { MdOutlineHttp, MdOutlineAttachFile } from 'react-icons/md'
+import { MdOutlineHttp } from 'react-icons/md'
 import { FaPercent } from 'react-icons/fa'
 import { AiTwotonePropertySafety } from 'react-icons/ai'
 import { TiTick } from 'react-icons/ti'
@@ -10,28 +10,46 @@ import formStyle from '../accountComps/AccountForm/AccountForm.module.css'
 import { Button } from '../components'
 import { DropZone } from './index'
 import { categoryArr } from './UploadNFTData'
-import images from '../img'
 
-
-const UploadNFT = () => {
+const UploadNFT = ({ mintNFT }) => {
   const [active, setActive] = useState(null)
   const [nftData, setNftData] = useState({
-    itemName: "",
+    name: "",
     website: "",
     description: "",
     royalties: "",
-    fileSize: "",
     properties: "",
-    category: ""
+    category: "",
+    image: null,
   })
+
+  const storeNFT = async () => {
+    try {
+      const { name, description, image } = nftData
+      const data = new FormData();
+      data.append("name", name);
+      data.append("description", description);
+      data.append("image", image);
+      const response = await fetch("/api/nft-storage", {
+        method: "POST",
+        body: data,
+      });
+      if (response.status === 201) {
+        const json = await response.json()
+        console.log("tokenURI: ", json)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <div className={Style.uploadNFT}>
-      <DropZone title="JPG, PNG, WEBM, MAX 100MB" heading="Drag & drop file" subHeading="or Browse media on your device" nftData={nftData} image={images.upload}/>
+      <DropZone title="JPG, PNG, WEBM, MAX 100MB" heading="Drag & drop file" subHeading="or Browse media on your device" nftData={nftData} setNftData={setNftData} />
       <div className={Style.upload_box}>
         <div className={formStyle.accountForm_box_input}>
-          <label htmlFor="itemName">Item Name</label>
-          <input type="text" placeholder='ex: zenitsu' className={formStyle.accountForm_box_input_username} required onChange={(e) => setNftData({ ...nftData, itemName: e.target.value })} />
+          <label htmlFor="name">Name</label>
+          <input type="text" placeholder='ex: zenitsu' className={formStyle.accountForm_box_input_username} required onChange={(e) => setNftData({ ...nftData, name: e.target.value })} />
         </div>
         <div className={formStyle.accountForm_box_input}>
           <label htmlFor="website">Website</label>
@@ -49,8 +67,28 @@ const UploadNFT = () => {
           <label htmlFor="description">Description</label>
           <textarea id="" cols="30" rows="10" placeholder='Something about yourself in few words' onChange={(e) => setNftData({ ...nftData, description: e.target.value })}></textarea>
         </div>
+        <div className={Style.form_box_input_social}>
+          <div className={formStyle.accountForm_box_input}>
+            <label htmlFor="Royalties">Royalties</label>
+            <div className={formStyle.accountForm_box_input_box}>
+              <div className={formStyle.accountForm_box_input_box_icon}>
+                <FaPercent />
+              </div>
+              <input type="text" placeholder='ex: 20%' onChange={(e) => setNftData({ ...nftData, royalties: e.target.value })} />
+            </div>
+          </div>
+          <div className={formStyle.accountForm_box_input}>
+            <label htmlFor="Properties">Properties</label>
+            <div className={formStyle.accountForm_box_input_box}>
+              <div className={formStyle.accountForm_box_input_box_icon}>
+                <AiTwotonePropertySafety />
+              </div>
+              <input type="text" placeholder='ex: properties' onChange={(e) => setNftData({ ...nftData, properties: e.target.value })} />
+            </div>
+          </div>
+        </div>
         <div className={formStyle.accountForm_box_input}>
-          <label htmlFor="name">
+          <label>
             Choose collection
           </label>
           <p className={Style.upload_box_input_para}>
@@ -72,38 +110,9 @@ const UploadNFT = () => {
             ))}
           </div>
         </div>
-        <div className={formStyle.accountForm_box_input_social}>
-          <div className={formStyle.accountForm_box_input}>
-            <label htmlFor="Royalties">Royalties</label>
-            <div className={formStyle.accountForm_box_input_box}>
-              <div className={formStyle.accountForm_box_input_box_icon}>
-                <FaPercent />
-              </div>
-              <input type="text" placeholder='ex: 20%' onChange={(e) => setNftData({ ...nftData, royalties: e.target.value })} />
-            </div>
-          </div>
-          <div className={formStyle.accountForm_box_input}>
-            <label htmlFor="Size">Size</label>
-            <div className={formStyle.accountForm_box_input_box}>
-              <div className={formStyle.accountForm_box_input_box_icon}>
-                <MdOutlineAttachFile />
-              </div>
-              <input type="text" placeholder='ex: 180 MB' onChange={(e) => setNftData({ ...nftData, fileSize: e.target.value })}/>
-            </div>
-          </div>
-          <div className={formStyle.accountForm_box_input}>
-            <label htmlFor="Properties">Properties</label>
-            <div className={formStyle.accountForm_box_input_box}>
-              <div className={formStyle.accountForm_box_input_box_icon}>
-                <AiTwotonePropertySafety />
-              </div>
-              <input type="text" placeholder='ex: properties' onChange={(e) => setNftData({ ...nftData, properties: e.target.value })}/>
-            </div>
-          </div>
-        </div>
         <div className={Style.upload_box_btn}>
-          <Button btnName="Upload" handleClick={() => {}} classStyle={Style.upload_box_btn_style}/>
-          <Button btnName="Preview" handleClick={() => {}} classStyle={Style.upload_box_btn_style}/>
+          <Button btnName="Upload" handleClick={async() => await storeNFT()} classStyle={Style.upload_box_btn_style} />
+          <Button btnName="Preview" handleClick={() => { }} classStyle={Style.upload_box_btn_style} />
         </div>
       </div>
     </div>

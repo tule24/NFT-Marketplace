@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes'
 // INTERNAL IMPORT
 import { NavBar, Footer } from '../components'
 import { NFTMarketplaceProvider } from '../Context/NFTMarketplaceContext'
+
 const MyApp = ({ Component, pageProps }) => (
     <ThemeProvider>
         <NFTMarketplaceProvider>

@@ -1,14 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
-import Router from 'next/router'
-import axios from 'axios'
-import { create as ipfsHttpClient } from 'ipfs-http-client'
 // INTERNAL IMPORT
-import { NFTMarketplaceABI, NFTMarketplaceAddress } from './constants'
+import { NFTMarketplaceABI } from './constants'
 
-const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0")
 // FETCH SMART CONTRACT
-const fetchContract = (signerOrProvider) => new ethers.Contract(NFTMarketplaceAddress, NFTMarketplaceABI, signerOrProvider)
+const fetchContract = (signerOrProvider) => new ethers.Contract(process.env.NEXT_PUBLIC_NFT_MARKET_ADDRESS, NFTMarketplaceABI, signerOrProvider)
 
 // CONNECT WITH SMART CONTRACT
 const useConnect = async () => {
@@ -61,25 +57,16 @@ export const NFTMarketplaceProvider = (({ children }) => {
             }
         }
     }
-    // upload to IPFS 
-    const uploadToIPFS = async (file) => {
-        try {
-            const added = await client.add({ content: file })
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`
-            return url
-        } catch (error) {
-            console.log("Error when uploading to IPFS: " + error)
-        }
-    }
     // mint NFT
-    const mintNFT = async (formInput, fileURL) => {
-        const { name, description, price } = formInput
-        if (!name || !description || !price || !fileURL) return console.log("Data is missing")
-        const data = JSON.stringify({ name, description, image: fileURL })
+    const mintNFT = async (nftData) => {
+        const { name, description, price, image } = nftData
+        if (!name || !description || !price || !image) return console.log("Data is missing")
+        const data = JSON.stringify({ name, description, image });
         try {
             const added = await client.add(data);
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`
-            const tokenId = await contract.mintToken(url)
+            const url = `https://infura-ipfs.io/ipfs/${added.path}`;
+            const _price = ethers.utils.parseUnits(price, "ether");
+            const tokenId = await contract.mintToken(url, _price)
             return tokenId
         } catch (error) {
             console.log("Error while mint NFT: " + error)
@@ -96,7 +83,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
         init()
     }, [])
     return (
-        <NFTMarketplaceContext.Provider value={{ connectWallet, currentAccount, uploadToIPFS, mintNFT }}>
+        <NFTMarketplaceContext.Provider value={{ connectWallet, currentAccount, mintNFT }}>
             {children}
         </NFTMarketplaceContext.Provider>
     )

@@ -46,7 +46,7 @@
     font-weight: 700;
     font-size: 1.2rem;
 }
-.dropZone_box_aside_box_preview_three {
+.dropZone_box_aside_box_preview_two {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
@@ -59,7 +59,7 @@
         display: grid;
     }
 
-    .dropZone_box_aside_box_preview_three {
+    .dropZone_box_aside_box_preview_two {
         grid-template-columns: 1fr;
     }
 }

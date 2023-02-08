@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
+import Link from 'next/link'
 // IMPORT ICON
 import { MdNotifications } from 'react-icons/md'
 import { BsSearch } from 'react-icons/bs'
@@ -79,6 +80,7 @@ const NavBar = () => {
       setTheme('light')
     }
   }
+
   return (
     <div className={Style.navbar}>
       <div className={Style.navbar_container}>
@@ -120,8 +122,8 @@ const NavBar = () => {
           {/* CREATE BUTTON SECTION */}
           <div className={Style.navbar_container_right_button}>
             {currentAccount ? (
-              <a href="/uploadNFT">
-                <Button btnName="Create" handleClick={() => {}} /></a>
+              <Link href={{ pathname: 'uploadNFT' }}>
+                <Button btnName="Create" handleClick={() => { }} /></Link>
             ) : <Button btnName="Connect" handleClick={connectWallet} />}
           </div>
           {/* BUTTON CHANGE THEME */}
@@ -149,7 +151,7 @@ const NavBar = () => {
       {
         openSideMenu && (
           <div className={Style.sideBar}>
-            <SideBar setOpenSideMenu={setOpenSideMenu} />
+            <SideBar setOpenSideMenu={setOpenSideMenu} connectWallet={connectWallet} currentAccount={currentAccount} />
             <div className={Style.navbar_container_theme_button_sideBar}>
               <input type="checkbox" id="themeSidebar" className={Style.navbar_container_theme_button_sideBar_checkbox} onChange={() => changeTheme()} />
               <label htmlFor="themeSidebar" className={Style.navbar_container_theme_button_sideBar_label}>

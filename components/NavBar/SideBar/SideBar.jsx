@@ -8,7 +8,7 @@ import Style from './SideBar.module.css'
 import images from '../../../img'
 import Button from '../../Button/Button'
 import { discover, helpCenter } from '../NavBarData'
-const SideBar = ({ setOpenSideMenu }) => {
+const SideBar = ({ setOpenSideMenu, connectWallet, currentAccount }) => {
   const [openDiscover, setOpenDiscover] = useState(false)
   const [openHelp, setOpenHelp] = useState(false)
 
@@ -94,8 +94,10 @@ const SideBar = ({ setOpenSideMenu }) => {
         </div>
       </div>
       <div className={Style.sideBar_button}>
-        <Button btnName="Create" handleClick={() => {}}/>
-        <Button btnName="Connect Wallet" handleClick={() => {}}/>
+        {currentAccount ? (
+          <a href="/uploadNFT">
+            <Button btnName="Create" handleClick={() => { }} /></a>
+        ) : <Button btnName="Connect" handleClick={connectWallet} />}
       </div>
     </div>
   )

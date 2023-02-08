@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { NFTMarketplaceContext } from '../Context/NFTMarketplaceContext'
+
 // INTERNAL IMPORT
 import Style from '../styles/UploadNFT.module.css'
 import { UploadNFT } from '../uploadNFTComps'
 const uploadNFT = () => {
+  const { mintNFT } = useContext(NFTMarketplaceContext)
   return (
     <div className={Style.uploadNFT}>
       <div className={Style.uploadNFT_box}>
@@ -15,7 +18,7 @@ const uploadNFT = () => {
           <p> <span>File types supported:</span> JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100MB</p>
         </div>
         <div className={Style.uploadNFT_box_form}>
-          <UploadNFT />
+          <UploadNFT mintNFT={mintNFT} />
         </div>
       </div>
     </div>
