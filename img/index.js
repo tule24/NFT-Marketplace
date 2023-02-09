@@ -54,8 +54,10 @@ import provider2 from './provider-2.png'
 import provider3 from './provider-3.png'
 import provider4 from './provider-4.png'
 import loader from './loader.gif'
+import giphy from './giphy.gif'
 
 export default {
+  giphy,
   loader,
   provider1,
   provider2,

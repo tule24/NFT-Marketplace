@@ -5,33 +5,29 @@ import Web3Modal from 'web3modal'
 import { toast } from 'react-toastify'
 // INTERNAL IMPORT
 import { NFTMarketplaceABI } from './constants'
+import { ipfsToHTTPS } from '../helpers'
+import axios from 'axios'
 
 // FETCH SMART CONTRACT
 const fetchContract = (signerOrProvider) => new ethers.Contract(process.env.NEXT_PUBLIC_NFT_MARKET_ADDRESS, NFTMarketplaceABI, signerOrProvider)
 
-const useContract = async () => {
-    try {
-        const web3Modal = new Web3Modal()
-        const connection = await web3Modal.connect()
-        const provider = new ethers.providers.Web3Provider(connection)
-        const signer = provider.getSigner()
-        const contract = fetchContract(signer)
-        return contract
-    } catch (error) {
-        console.log("Something went wrong while connecting with contract")
-    }
-}
-
 export const NFTMarketplaceContext = React.createContext()
 export const NFTMarketplaceProvider = (({ children }) => {
     const [currentAccount, setCurrentAccount] = useState("")
+    const [signer, setSigner] = useState(null)
+    const [loading, setLoading] = useState(false)
     const { theme, setTheme } = useTheme()
-    const provider = new ethers.providers.JsonRpcProvider();
+    const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_GOERLI_URL);
 
     // handle account change
-    const handleAccountChange = (accounts) => {
+    const handleAccountChange = async (accounts) => {
         if (accounts.length) {
             setCurrentAccount(accounts[0])
+            const web3Modal = new Web3Modal()
+            const connection = await web3Modal.connect()
+            const provider = new ethers.providers.Web3Provider(connection)
+            const signer = provider.getSigner()
+            setSigner(signer)
         } else {
             console.log("No account found")
         }
@@ -43,7 +39,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
             const accounts = await window.ethereum.request({
                 method: "eth_accounts",
             })
-            handleAccountChange(accounts)
+            await handleAccountChange(accounts)
         } catch (error) {
             console.log("Something wrong while connecting to wallet", error)
         }
@@ -55,7 +51,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
             const accounts = await window.ethereum.request({
                 method: "eth_requestAccounts",
             })
-            handleAccountChange(accounts)
+            await handleAccountChange(accounts)
         } catch (error) {
             console.log("Something wrong while connecting to wallet", error)
         }
@@ -74,8 +70,9 @@ export const NFTMarketplaceProvider = (({ children }) => {
             });
             if (response.status === 201) {
                 const json = await response.json()
-                console.log("tokenURI: ", json)
-                return json.uri
+                const tokenURI = ipfsToHTTPS(json.uri)
+                console.log("tokenURI: ", tokenURI)
+                return tokenURI
             }
         } catch (e) {
             console.log(e)
@@ -86,41 +83,50 @@ export const NFTMarketplaceProvider = (({ children }) => {
     // mint NFT
     const mintNFT = async (nftData) => {
         try {
+            setLoading(true)
             const tokenURI = await storeNFT(nftData)
-            const contract = await useContract()
+            const contract = fetchContract(signer)
             const transaction = await contract.mintToken(tokenURI)
             const receipt = await transaction.wait()
             const tokenID = Number(receipt.events[1].args[0])
+            setLoading(false)
             if (tokenID) {
                 toast.success(`😁 A NFT was minted with a token ID of ${tokenID} 😁`)
             }
         } catch (error) {
-            console.log("Error while mint NFT: " + error)
+            console.log(error)
+            setLoading(false)
             toast.error(`😭 Something wrong when mint NFT 😭`)
         }
     }
     // list NFT
     const listNFT = async (tokenID, price) => {
         try {
+            setLoading(true)
             const wei = ethers.utils.parseEther(price);
-            const contract = await useContract()
+            const contract = fetchContract(signer)
             const transaction = await contract.listNftItem(tokenID, wei, { value: ethers.utils.parseEther("0.0015") })
             await transaction.wait()
+            setLoading(false)
             toast(`😁 A NFT with the token ID ${tokenID} was listed at a price of ${price} ETH 😁`)
         } catch (e) {
             console.log(e)
+            setLoading(false)
             toast.error(`😭 Something wrong when list NFT 😭`)
         }
     }
     // unlist NFT
     const unlistNFT = async (tokenID) => {
         try {
-            const contract = await useContract()
+            setLoading(true)
+            const contract = fetchContract(signer)
             const transaction = await contract.unlistNftItem(tokenID)
             await transaction.wait()
+            setLoading(false)
             toast(`😁 A NFT with the token ID ${tokenID} was unlisted 😁`)
         } catch (e) {
             console.log(e)
+            setLoading(false)
             toast.error(`😭 Something wrong when unlist NFT 😭`)
         }
 
@@ -128,13 +134,16 @@ export const NFTMarketplaceProvider = (({ children }) => {
     // update price NFT
     const updatePriceNFT = async (tokenID, price) => {
         try {
-            const contract = await useContract()
+            setLoading(true)
+            const contract = fetchContract(signer)
             const wei = ethers.utils.parseEther(price);
             const transaction = await contract.updateItemPrice(tokenID, wei)
             await transaction.wait()
             toast(`😁 A NFT with the token ID ${tokenID} was updated price to ${price} ETH 😁`)
+            setLoading(false)
         } catch (e) {
             console.log(e)
+            setLoading(false)
             toast.error(`😭 Something wrong when update price NFT 😭`)
         }
 
@@ -142,15 +151,17 @@ export const NFTMarketplaceProvider = (({ children }) => {
     // buy NFT
     const buyNFT = async (tokenID, price) => {
         try {
-            const contract = await useContract()
+            setLoading(true)
+            const contract = fetchContract(signer)
             const transaction = await contract.buyNftItem(tokenID, { value: ethers.utils.parseEther(price) })
             await transaction.wait()
+            setLoading(false)
             toast(`😁 A NFT with the token ID ${tokenID} was sold at price of ${price} ETH 😁`)
         } catch (e) {
             console.log(e)
+            setLoading(false)
             toast.error(`😭 Something wrong when sell NFT 😭`)
         }
-
     }
 
     // FECTH DATA FROM CONTRACT
@@ -159,16 +170,19 @@ export const NFTMarketplaceProvider = (({ children }) => {
         try {
             const contract = fetchContract(provider);
             const total = await contract.getTotalSupply()
+            console.log(Number(total))
             return total
         } catch (e) {
             console.log(e)
         }
     }
     // get NFT by tokenID
-    const getNFTItem = async (tokenID) => {
+    const getNFTItem = async (_tokenID) => {
         try {
             const contract = fetchContract(provider);
-            const nft = await contract.getNFTItem(tokenID)
+            const nft = await contract.getNFTItem(_tokenID)
+            const res = await formatData(contract, nft)
+            console.log(res)
             return nft
         } catch (e) {
             console.log(e)
@@ -179,20 +193,36 @@ export const NFTMarketplaceProvider = (({ children }) => {
         try {
             const contract = fetchContract(provider);
             const allNFT = await contract.getAllNFTItem()
+            const res = await formatData(contract, allNFT)
+            console.log(res)
             return allNFT
         } catch (e) {
             console.log(e)
         }
     }
     // get all user NFT 
-    const getUserNFT = async () => {
+    const getMyNFT = async () => {
         try {
-            const contract = fetchContract(provider);
-            const userNFT = await contract.getUserNFT(currentAccount)
+            const contract = fetchContract(signer);
+            const userNFT = await contract.getMyNFT()
+            const res = await Promise.all(userNFT.map(async (nft) => await formatData(contract, nft)))
+            console.log(res)
             return userNFT
         } catch (e) {
             console.log(e)
         }
+    }
+    // format data & get in4 from ipfs
+    const formatData = async (contract, data) => {
+        const { tokenId, seller, owner, price } = data
+        let tokenURI = await contract.tokenURI(tokenId)
+        if (tokenURI.startsWith("ipfs://")) {
+            tokenURI = ipfsToHTTPS(tokenURI)
+        }
+        const { data: { name, description, image } } = await axios.get(tokenURI)
+        const newImage = ipfsToHTTPS(image)
+        const newPrice = ethers.utils.formatUnits(price.toString(), "ether")
+        return { name, description, newImage, seller, owner, newPrice, tokenURI }
     }
 
     useEffect(() => {
@@ -205,6 +235,8 @@ export const NFTMarketplaceProvider = (({ children }) => {
             value={{
                 currentAccount,
                 theme,
+                loading,
+                setLoading,
                 setTheme,
                 connectWallet,
                 mintNFT,
@@ -215,7 +247,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
                 getTotalSupply,
                 getNFTItem,
                 getAllNFTItem,
-                getUserNFT
+                getMyNFT
             }}>
             {children}
         </NFTMarketplaceContext.Provider>

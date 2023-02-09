@@ -21,7 +21,7 @@ const NavBar = () => {
   const [notification, setNotification] = useState(false)
   const [profile, setProfile] = useState(false)
   const [openSideMenu, setOpenSideMenu] = useState(false)
-  const { connectWallet, currentAccount, setTheme, theme } = useContext(NFTMarketplaceContext)
+  const { connectWallet, currentAccount, setTheme, theme, getTotalSupply, getNFTItem, getAllNFTItem, getMyNFT } = useContext(NFTMarketplaceContext)
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
@@ -162,7 +162,12 @@ const NavBar = () => {
           </div>
         )
       }
-      <ToastContainer closeButton={true} theme={theme} />
+      <button onClick={() => getTotalSupply()}>GET TOTAL SUPPLY</button>
+      <button onClick={() => getNFTItem(1)}>GET NFT ITEM</button>
+      <button onClick={() => getAllNFTItem()}>GET ALL NFT</button>
+      <button onClick={() => getMyNFT()}>GET USER NFT</button>
+
+      <ToastContainer closeButton={true} theme={theme} position='top-center'/>
     </div>
   )
 }

@@ -1,25 +1,18 @@
 .loader {
-    width: 100%;
-    margin-block: 4rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, .7);
 }
 
-.loader_box {
-    width: 50%;
-    margin: 0 auto;
-}
-
-.loader_box_img {
-    margin-bottom: 14rem;
-    margin-top: -2rem;
-    animation: mymove 4s infinite;
-} 
-
-@keyframes mymove {
-    50% {
-        transform: rotate(360deg);
-    }
-}
-
-.loader_box_img_img {
-    border-radius: 50%;
+.loader_img {
+    width: 10rem;
+    height: 10rem;
+    display: block;
 }

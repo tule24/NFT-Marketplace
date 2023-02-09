@@ -1,17 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
 // INTERNAL IMPORT
 import Style from './Loader.module.css'
 import images from '../../img'
+import { NFTMarketplaceContext } from '../../Context/NFTMarketplaceContext'
 const Loader = () => {
+  const { loading } = useContext(NFTMarketplaceContext)
   return (
-    <div className={Style.loader}>
-        <div className={Style.loader_box}>
-            <div className={Style.loader_box_img}>
-                <Image src={images.loader} alt="loader" width={200} height={200} className={Style.loader_box_img_img}/>
-            </div>
-        </div>
-    </div>
+    loading && (<div className={Style.loader}>
+      <Image src={images.giphy} alt="loader" className={Style.loader_img} />
+    </div>)
   )
 }
 
