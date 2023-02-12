@@ -52,4 +52,4 @@ export const config = {
   },
 };
 
-export default handler;
+export default handler
