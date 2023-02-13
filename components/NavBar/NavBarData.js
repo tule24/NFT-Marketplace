@@ -8,28 +8,12 @@ const discover = [
         link: "search"
     },
     {
-        name: "Author Profile",
+        name: "My Profile",
         link: "author"
     },
     {
-        name: "NFT Detail",
-        link: "nftDetail"
-    },
-    {
-        name: "Account Setting",
-        link: "account"
-    },
-    {
-        name: "Upload NFT",
-        link: "uploadNFT"
-    },
-    {
-        name: "Connect Wallet",
-        link: "connectWallet"
-    },
-    {
-        name: "Blog",
-        link: "blog"
+        name: "Create NFT",
+        link: "createNFT"
     }
 ]
 
@@ -41,14 +25,6 @@ const helpCenter = [
     {
         name: "Contact Us",
         link: "contact"
-    },
-    {
-        name: "Sign Up",
-        link: "signUp"
-    },
-    {
-        name: "Sign In",
-        link: "login"
     },
     {
         name: "Subscription",

@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 // INTERNAL IMPORT
 import Style from '../styles/Home.module.css'
-import { HeroSection, Service, BigNFTSlider, Subscribe, Title, Category, Filter, NFTCard, Collection, Follower, AudioLive, NFTSlider, Brand, Video } from '../components'
+import { HeroSection, Service, BigNFTSlider, Title, Filter, NFTCard, Collection, Follower, AudioLive, NFTSlider, Brand, Video } from '../components'
+import { NFTMarketplaceContext } from 'Context/NFTMarketplaceContext'
 
 const Home = () => {
+  const { nfts } = useContext(NFTMarketplaceContext)
   return (
     <div className={Style.homePage}>
       <HeroSection />
@@ -16,11 +18,8 @@ const Home = () => {
       <Collection />
       <Title heading="Featured NFTs" paragraph="Discover the most outstanding NFTs in all topics of life." />
       <Filter />
-      <NFTCard />
-      <Title heading="Browse by category" paragraph="Explore the NFTs in the most featured categories." />
-      <Category />
+      <NFTCard nfts={nfts} />
       <Video />
-      <Subscribe />
       <Brand />
     </div>
   )

@@ -8,8 +8,18 @@ const createUser = async (req, res) => {
         res.status(StatusCodes.BAD_REQUEST).send("Please provide wallet address")
     }
 
+    const user = await User.findOne({ wallet })
+    if (user) {
+        res.status(StatusCodes.OK).json({
+            status: "success",
+            data: user
+        })
+    }
     const newUser = await User.create(req.body)
-    res.status(StatusCodes.CREATED).json({ user: newUser })
+    res.status(StatusCodes.CREATED).json({
+        status: "success",
+        data: newUser
+    })
 }
 
 const updateUser = async (req, res) => {
@@ -19,7 +29,10 @@ const updateUser = async (req, res) => {
         throw new NotFoundError(`Not found user with id ${userID}`)
     }
 
-    res.status(StatusCodes.OK).json({ user })
+    res.status(StatusCodes.OK).json({
+        status: "success",
+        data: user
+    })
 }
 
 const deleteUser = async (req, res) => {
@@ -28,14 +41,18 @@ const deleteUser = async (req, res) => {
     if (!user) {
         throw new NotFoundError(`Not found user with id ${userID}`)
     }
-    res.status(StatusCodes.OK).json({ user })
+    res.status(StatusCodes.OK).json({
+        status: "success",
+        data: user
+    })
 }
 
 const getAllUser = async (req, res) => {
     const users = await User.find()
     res.status(StatusCodes.OK).json({
+        status: "success",
         total: users.length,
-        users
+        data: users
     })
 }
 
@@ -45,7 +62,10 @@ const getUser = async (req, res) => {
     if (!user) {
         throw new NotFoundError(`Not found user with id ${userID}`)
     }
-    res.status(StatusCodes.OK).json({ user })
+    res.status(StatusCodes.OK).json({
+        status: "success",
+        data: user
+    })
 }
 
 export { createUser, updateUser, deleteUser, getAllUser, getUser }

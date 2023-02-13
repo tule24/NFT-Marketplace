@@ -1,19 +1,17 @@
 import React from 'react'
 //INTERNAL IMPORT
 import Style from '../styles/Collection.module.css'
-import images from '../img'
-import { Banner, CollectionProfile, NFTCardTwo } from '../collectionComps'
-import { NFTSlider, Brand, Filter } from '../components'
+import { CollectionProfile, NFTCardTwo } from '../collectionComps'
+import { Filter } from '../components'
+import { NFTMarketplaceContext } from 'Context/NFTMarketplaceContext'
+
 const collection = () => {
-  const collectionArray = [1,2,3,2,3,1,3,2,1]
+  const { nfts } = useContext(NFTMarketplaceContext)
   return (
     <div className={Style.collection}>
-      <Banner bannerImg={images.creatorbackground1}/>
       <CollectionProfile />
       <Filter />
-      <NFTCardTwo NFTData={collectionArray}/>
-      <NFTSlider />
-      <Brand />
+      <NFTCardTwo nfts={nfts} />
     </div>
   )
 }

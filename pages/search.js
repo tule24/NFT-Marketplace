@@ -5,14 +5,15 @@ import { NFTSlider, Brand, Filter } from '../components'
 import { SearchBar } from '../searchComps'
 import { Banner, NFTCardTwo } from '../collectionComps'
 import images from '../img'
+import { NFTMarketplaceContext } from 'Context/NFTMarketplaceContext'
 const search = () => {
-  const collectionArray = [1,2,3,2,3,1,3,2,1]
+  const { nfts } = useContext(NFTMarketplaceContext)
   return (
     <div className={Style.searchPage}>
-      <Banner bannerImg={images.creatorbackground5}/>
+      <Banner bannerImg={images.creatorbackground5} />
       <SearchBar />
       <Filter />
-      <NFTCardTwo NFTData={collectionArray}/>
+      <NFTCardTwo nfts={nfts} />
       <NFTSlider />
       <Brand />
     </div>

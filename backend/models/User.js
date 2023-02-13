@@ -1,11 +1,16 @@
 import { Schema, model, models } from "mongoose"
 import WAValidator from "wallet-address-validator"
 const userSchema = new Schema({
-    name: String,
+    name: {
+        type: String,
+        require: [true, "Please provide your name"]
+    },
     wallet: {
         type: String,
         require: [true, "Please provide wallet address"],
         unique: true,
+        immutable: true,
+        lowercase: true,
         validate: {
             validator: function (val) {
                 return WAValidator.validate(val, 'ETH', 'testnet')
@@ -14,10 +19,7 @@ const userSchema = new Schema({
         }
     },
     email: String,
-    ava: {
-        type: String,
-        default: "ava.jpg"
-    },
+    description: String,
     role: {
         type: String,
         default: "user",

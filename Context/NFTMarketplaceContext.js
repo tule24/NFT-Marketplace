@@ -13,16 +13,17 @@ const fetchContract = (signerOrProvider) => new ethers.Contract(process.env.NEXT
 
 export const NFTMarketplaceContext = React.createContext()
 export const NFTMarketplaceProvider = (({ children }) => {
-    const [currentAccount, setCurrentAccount] = useState("")
+    const [currentAccount, setCurrentAccount] = useState(null)
     const [signer, setSigner] = useState(null)
     const [loading, setLoading] = useState(false)
+    const [nfts, setNfts] = useState([])
     const { theme, setTheme } = useTheme()
     const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_GOERLI_URL);
 
     // handle account change
     const handleAccountChange = async (accounts) => {
         if (accounts.length) {
-            setCurrentAccount(accounts[0])
+            await createUser(accounts[0])
             const web3Modal = new Web3Modal()
             const connection = await web3Modal.connect()
             const provider = new ethers.providers.Web3Provider(connection)
@@ -225,9 +226,40 @@ export const NFTMarketplaceProvider = (({ children }) => {
         return { name, description, newImage, seller, owner, newPrice, tokenURI }
     }
 
+    // get all nft
+    const getALLNFT = async () => {
+        try {
+            const response = await axios.get("/api/nft");
+            if (response.status === 200) {
+                setNfts(response.data.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // create user
+    const createUser = async (wallet) => {
+        try {
+            const data = {
+                name: wallet,
+                wallet: wallet
+            }
+            const res = await axios.post('/api/user', data)
+            if (res.status <= 201) {
+                const data = res.data.data
+                console.log(data)
+                setCurrentAccount(data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         checkWalletConnected()
         window.ethereum.on('accountsChanged', handleAccountChange)
+        getALLNFT()
     }, [])
 
     return (
@@ -236,6 +268,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
                 currentAccount,
                 theme,
                 loading,
+                nfts,
                 setLoading,
                 setTheme,
                 connectWallet,

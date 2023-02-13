@@ -1,8 +1,6 @@
 import React from 'react'
-import Image from 'next/image'
 // INTERNAL IMPORT 
 import Style from './AuthorNFTCardBox.module.css'
-import images from '../../img'
 import { NFTCardTwo } from '../../collectionComps'
 import FollowerCard from '../../components/Follower/FollowerCard/FollowerCard'
 const AuthorNFTCardBox = ({authorTab}) => {
@@ -13,9 +11,9 @@ const AuthorNFTCardBox = ({authorTab}) => {
     const following = [2,5,4,3,6,8]
     return (
         <div className={Style.authorNFTCardBox}>
-            {authorTab === "Collectiables" && <NFTCardTwo NFTData={collectiables}/>}
-            {authorTab === "Created" && <NFTCardTwo NFTData={created}/>}
-            {authorTab === "Liked" && <NFTCardTwo NFTData={liked}/>}
+            {authorTab === "All NFTs" && <NFTCardTwo nfts={collectiables}/>}
+            {authorTab === "Listed NFTs" && <NFTCardTwo nfts={created}/>}
+            {authorTab === "Unlisted NFTs" && <NFTCardTwo nfts={liked}/>}
             {authorTab === "Followers" && <FollowerCard cardData={follower}/>}
             {authorTab === "Following" && <FollowerCard cardData={following}/>}
         </div>

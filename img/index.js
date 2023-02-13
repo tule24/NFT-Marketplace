@@ -26,21 +26,12 @@ import service3 from "./service-3.png";
 import service4 from "./service-4.png";
 import logoLight from "./logo-light.svg";
 import logo from "./logo.svg";
-import facebook from "./facebook.svg";
-import twitter from "./twitter.svg";
-import telegram from "./telegram.svg";
-import youtube from "./youtube.svg";
-import vimeo from "./vimeo.svg";
-import vector from "./VectorHIW.svg";
-import zgcmq from "./zgcmq.svg";
 import hero from "./hero.png";
 import nft_1 from "./nft_1.png";
-import getAble from "./getable.png";
 import nft_image_1 from "./nft-image-1.png";
 import nft_image_2 from "./nft-image-2.png";
 import nft_image_3 from "./nft-image-3.png";
 import musiceWave from "./musicwave.png";
-import update from "./update.png";
 import earn from "./earn.png"
 import nftVideo from './nftvideo.png'
 import upload from './upload.png'
@@ -50,19 +41,21 @@ import founder2 from './founder2.jpg'
 import founder3 from './founder3.jpg'
 import founder4 from './founder4.jpg'
 import provider1 from './provider-1.png'
-import provider2 from './provider-2.png'
-import provider3 from './provider-3.png'
-import provider4 from './provider-4.png'
-import loader from './loader.gif'
 import giphy from './giphy.gif'
+import collection_art from './collection-art.jpg'
+import collection_cinematic from './collection-cinematic.jpg'
+import collection_digital from './collection-digital.jpg'
+import collection_music from './collection-music.jpg'
+import collection_sport from './collection-sport.jpg'
 
 export default {
+  collection_art,
+  collection_cinematic,
+  collection_digital,
+  collection_music,
+  collection_sport,
   giphy,
-  loader,
   provider1,
-  provider2,
-  provider3,
-  provider4,
   founder1,
   founder2,
   founder3,
@@ -72,12 +65,10 @@ export default {
   nftVideo,
   earn,
   collection,
-  update,
   musiceWave,
   nft_image_1,
   nft_image_2,
   nft_image_3,
-  getAble,
   nft_1,
   hero,
   creatorbackground1,
@@ -107,11 +98,4 @@ export default {
   service4,
   logo,
   logoLight,
-  facebook,
-  telegram,
-  twitter,
-  vector,
-  vimeo,
-  youtube,
-  zgcmq,
 };

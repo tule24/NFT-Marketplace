@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import { FcCameraAddon } from 'react-icons/fc'
 // INTERNAL IMPORT
 import Style from './HeroSection.module.css'
@@ -16,7 +15,7 @@ const HeroSection = () => {
           <Button btnName='Start your search' />
         </div>
         <div className={Style.heroSection_box_right}>
-          <Image src={images.hero} alt="Hero section" className={Style.heroSection_img} />
+          <img src="https://ipfs.io/ipfs/bafybeifsigvmactsur7vv734rlhhmagwkcqh22jvnqnkdznhcio2jznvsu/nft-image-3.png" alt="Hero section" className={Style.heroSection_img} />
         </div>
       </div>
     </div>

@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { TiSocialFacebook, TiSocialTwitter, TiSocialYoutube, TiSocialInstagram } from 'react-icons/ti'
 
 // INTERNAL IMPORT
 import Style from './CollectionProfile.module.css'
 import images from '../../img'
+import { collectionData } from '../collections'
 const CollectionProfile = () => {
-  const cardArray = [1, 2, 3, 4]
+  const [curCollection, setCurCollection] = useState(0)
   return (
     <div className={Style.collectionProfile}>
       <div className={Style.collectionProfile_box}>
         <div className={Style.collectionProfile_box_left}>
-          <Image src={images.nft_image_1} alt="nft image" className={Style.collectionProfile_box_left_img} />
+          <Image src={collectionData[curCollection].image} alt="nft image" className={Style.collectionProfile_box_left_img} />
           <div className={Style.collectionProfile_box_left_social}>
             <a href="#">
               <TiSocialFacebook />
@@ -28,14 +29,13 @@ const CollectionProfile = () => {
           </div>
         </div>
         <div className={Style.collectionProfile_box_middle}>
-          <h1>Awesome NFTs Collection</h1>
-          <p>Karafuru is home to 5,555 generative arts where colors reign supreme. Leave the drab reality and enter the world of Karafuru Museum of Toys.</p>
+          <h1>{collectionData[curCollection].name} Collection</h1>
+          <p>{collectionData[curCollection].description}</p>
           <div className={Style.collectionProfile_box_middle_box}>
-            {cardArray.map((el, i) => (
-              <div className={Style.collectionProfile_box_middle_box_item} key={i + 1}>
-                <small>Floor price</small>
-                <p>${i + 1}95,4683</p>
-                <span>+{i + 2}.11%</span>
+            {collectionData.filter(e => e.id !== curCollection).map((el, i) => (
+              <div className={Style.collectionProfile_box_middle_box_item} onClick={() => setCurCollection(el.id)} key={i} >
+                <Image src={el.image} alt="colection" />
+                <h3>{el.name}</h3>
               </div>
             ))}
           </div>

@@ -5,6 +5,7 @@ import { FaUserAlt, FaRegImage, FaUserEdit } from 'react-icons/fa'
 import { MdHelpCenter } from 'react-icons/md'
 import { TbDownload } from 'react-icons/tb'
 import { BiUser } from 'react-icons/bi'
+import Blockies from 'react-blockies'
 // INTERNAL IMPORT 
 import Style from './Profile.module.css'
 import images from '../../../img'
@@ -13,14 +14,14 @@ import { minifyAddress } from '../../../helpers'
 
 const Profile = () => {
   const { currentAccount } = useContext(NFTMarketplaceContext)
-  const miniAddress = minifyAddress(currentAccount)
+  const miniAddress = minifyAddress(currentAccount.wallet)
   return (
     <div className={Style.profile}>
       {currentAccount ? (
         <div className={Style.profile_account}>
-          <Image src={images.user1} alt="user profile" width={50} height={50} className={Style.profile_account_img} />
+          <Blockies seed={currentAccount.wallet.toLowerCase()} className={Style.profile_account_img} />
           <div className={Style.profile_account_info}>
-            <p>User</p>
+            <p>{currentAccount.name !== currentAccount.wallet ? currentAccount.name : currentAccount.role}</p>
             <small>{miniAddress}</small>
           </div>
         </div>
@@ -43,15 +44,9 @@ const Profile = () => {
             </p>
           </div>
           <div className={Style.profile_menu_one_item}>
-            <FaRegImage />
-            <p>
-              <Link href={{ pathname: '/my-items' }}>My Items</Link>
-            </p>
-          </div>
-          <div className={Style.profile_menu_one_item}>
             <FaUserEdit />
             <p>
-              <Link href={{ pathname: '/edit-profile' }}>Edit</Link>
+              <Link href={{ pathname: '/edit-profile' }}>Edit Profile</Link>
             </p>
           </div>
         </div>

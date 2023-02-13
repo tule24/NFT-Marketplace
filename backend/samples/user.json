@@ -1,0 +1,12 @@
+[
+    {
+        "name": "account-1",
+        "wallet": "0x1BfC7c4Bce1DB93Ea3F48BFC52A6a7fccc770D3B",
+        "email": "account-1@gmail.com"
+    },
+    {
+        "name": "account-2",
+        "wallet": "0x0c89E37577FbE589c76599B0B2F30BdCD7c76c20",
+        "email": "account-2@gmail.com"
+    }
+]

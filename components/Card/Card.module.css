@@ -49,10 +49,6 @@
     gap: .5rem;
 }
 
-.card_box_update_left_like_icon {
-    color: red;
-}
-
 .card_box_update_right {
     background-color: var(--shadow-light-color);
     padding: .5rem 5rem;
@@ -109,6 +105,7 @@
     padding: 0 0 .5rem 0;
     transform: skewX(45deg);
     border-top-right-radius: 1rem;
+    margin-bottom: -1px;
 }
 
 .card_box_update_details_price_box {

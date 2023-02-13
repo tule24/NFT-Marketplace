@@ -2,15 +2,14 @@ import React from 'react'
 import Image from 'next/image'
 //INTERNAL IMPORT
 import Style from './NFTSliderCard.module.css'
-import images from '../../../img'
 import LikeProfile from '../../LikeProfile/LikeProfile'
-
+import images from '../../../img'
 const NFTSliderCard = ({i}) => {
   return (
     <div className={Style.sliderCard}>
         <div className={Style.sliderCard_box}>
             <div className={Style.sliderCard_box_img}>
-                <Image src={images[`creatorbackground${i + 1}`]} alt="slider profile" className={Style.sliderCard_box_img_img}/>
+                <Image src={images.collection} className={Style.sliderCard_box_img_img} alt="collection"/>
             </div>
             <div className={Style.sliderCard_box_title}>
                 <p>NFT Video #1234</p>

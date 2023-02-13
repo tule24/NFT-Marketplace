@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
+import Blockies from 'react-blockies'
 // IMPORT ICON
 import { MdNotifications } from 'react-icons/md'
 import { BsSearch } from 'react-icons/bs'
@@ -14,56 +15,12 @@ import { Button } from '../index'
 import images from '../../img'
 import { NFTMarketplaceContext } from '../../Context/NFTMarketplaceContext'
 import { ToastContainer } from 'react-toastify'
+import { BiUser } from 'react-icons/bi'
 
 const NavBar = () => {
-  const [discover, setDiscover] = useState(false)
-  const [help, setHelp] = useState(false)
-  const [notification, setNotification] = useState(false)
   const [profile, setProfile] = useState(false)
   const [openSideMenu, setOpenSideMenu] = useState(false)
-  const { connectWallet, currentAccount, setTheme, theme, getTotalSupply, getNFTItem, getAllNFTItem, getMyNFT } = useContext(NFTMarketplaceContext)
-
-  const openMenu = (e) => {
-    const btnText = e.target.innerText;
-    if (btnText === "Discover") {
-      discover ? setDiscover(false) : setDiscover(true);
-      setHelp(false);
-      setNotification(false);
-      setProfile(false);
-    } else if (btnText == "Help Center") {
-      help ? setHelp(false) : setHelp(true);
-      setDiscover(false);
-      setNotification(false);
-      setProfile(false);
-    } else {
-      setHelp(false);
-      setDiscover(false);
-      setNotification(false);
-      setProfile(false);
-    }
-  }
-
-  const openNotification = () => {
-    if (!notification) {
-      setNotification(true);
-      setDiscover(false);
-      setHelp(false);
-      setProfile(false);
-    } else {
-      setNotification(false);
-    }
-  }
-
-  const openProfile = () => {
-    if (!profile) {
-      setProfile(true);
-      setHelp(false);
-      setNotification(false);
-      setDiscover(false);
-    } else {
-      setProfile(false);
-    }
-  }
+  const { connectWallet, currentAccount, setTheme, theme } = useContext(NFTMarketplaceContext)
 
   const openSideBar = () => {
     if (!openSideMenu) {
@@ -99,25 +56,16 @@ const NavBar = () => {
           {/* DISCOVER MENU */}
           <div className={Style.navbar_container_right_discover}>
             <p onClick={(e) => { openMenu(e) }}>Discover</p>
-            {discover && (
-              <div className={Style.navbar_container_right_discover_box}>
-                <Discover />
-              </div>
-            )}
+            <div className={Style.navbar_container_right_discover_box}>
+              <Discover />
+            </div>
           </div>
           {/* HELP CENTER MENU */}
           <div className={Style.navbar_container_right_help}>
             <p onClick={(e) => { openMenu(e) }}>Help Center</p>
-            {help && (
-              <div className={Style.navbar_container_right_help_box}>
-                <HelpCenter />
-              </div>
-            )}
-          </div>
-          {/* NOTIFICATION */}
-          <div className={Style.navbar_container_right_notify}>
-            <MdNotifications className={Style.notify} onClick={() => openNotification()} />
-            {notification && <Notification />}
+            <div className={Style.navbar_container_right_help_box}>
+              <HelpCenter />
+            </div>
           </div>
           {/* CREATE BUTTON SECTION */}
           <div className={Style.navbar_container_right_button}>
@@ -137,7 +85,14 @@ const NavBar = () => {
           {/* USER PROFILE */}
           <div className={Style.navbar_container_right_profile_box}>
             <div className={Style.navbar_container_right_profile}>
-              <Image src={images.user1} alt="Profile" width={40} height="40" className={Style.navbar_container_right_profile} onClick={() => openProfile()} />
+              {currentAccount ? (
+                <div onClick={() => setProfile(!profile)} >
+                  <Blockies seed={currentAccount?.wallet.toLowerCase()} className={Style.navbar_container_right_profile} />
+                </div>
+              ) : (
+                <BiUser size={50} className={Style.profile_account_img} />
+              )
+              }
               {profile && <Profile />}
             </div>
           </div>
@@ -162,12 +117,7 @@ const NavBar = () => {
           </div>
         )
       }
-      <button onClick={() => getTotalSupply()}>GET TOTAL SUPPLY</button>
-      <button onClick={() => getNFTItem(1)}>GET NFT ITEM</button>
-      <button onClick={() => getAllNFTItem()}>GET ALL NFT</button>
-      <button onClick={() => getMyNFT()}>GET USER NFT</button>
-
-      <ToastContainer closeButton={true} theme={theme} position='top-center'/>
+      <ToastContainer closeButton={true} theme={theme} position='top-center' />
     </div>
   )
 }

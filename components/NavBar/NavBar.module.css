@@ -63,10 +63,17 @@
     font-weight: 600;
 }
 
+.navbar_container_right_discover:hover .navbar_container_right_discover_box {
+    display: block;
+}
+
 .navbar_container_right_help {
     position: relative;
     cursor: pointer;
     font-weight: 600;
+}
+.navbar_container_right_help:hover .navbar_container_right_help_box {
+    display: block;
 }
 
 .navbar_container_right_help>p,
@@ -84,6 +91,8 @@
     border-radius: 1rem;
     background-color: var(--main-bg-color);
     font-weight: 400;
+    transition: all .1s;
+    display: none;
 }
 
 .navbar_container_right_notify {

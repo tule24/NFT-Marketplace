@@ -6,15 +6,13 @@ import { Brand, Title } from '../components'
 import { AuthorTaps, AuthorProfileCard, AuthorNFTCardBox } from '../authorComps'
 import images from '../img'
 const author = () => {
-  const [authorTab, setAuthorTab] = useState("Collectiables")
+  const [authorTab, setAuthorTab] = useState("All NFTs")
   return (
     <div className={Style.banner}>
       <Banner bannerImg={images.creatorbackground2} />
       <AuthorProfileCard />
       <AuthorTaps setAuthorTab={setAuthorTab}/>
       <AuthorNFTCardBox authorTab={authorTab}/>
-      <Title heading="Popular Creator" paragraph="Click on music icon and enjoy NFT music or audio"/>
-      <Brand />
     </div>
   )
 }

@@ -7,10 +7,9 @@ import DaysComponent from './DaysComponent/DaysComponent'
 const Collection = () => {
     const [tabCollection, setTabCollection] = useState('popular')
 
-    const cardArray = [1, 2, 3, 4, 5, 6, 7, 8]
-    const followingArray = [1, 2, 3, 4]
-    const newsArray = [1, 2, 3, 4, 5, 6]
-
+    const cardArray = [4, 5, 6,]
+    const followingArray = [1, 2, 3,]
+    const newsArray = [2, 3, 4,]
 
     return (
         <div className={Style.collection}>

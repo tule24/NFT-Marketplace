@@ -17,10 +17,11 @@ const Filter = () => {
             <div className={Style.filter_box}>
                 <div className={Style.filter_box_left}>
                     <button onClick={() => {}}>NFTs</button>
-                    <button onClick={() => {}}>Arts</button>
-                    <button onClick={() => {}}>Musics</button>
-                    <button onClick={() => {}}>Sports</button>
-                    <button onClick={() => {}}>Photos</button>
+                    <button onClick={() => {}}>Art</button>
+                    <button onClick={() => {}}>Cinematic</button>
+                    <button onClick={() => {}}>Digital</button>
+                    <button onClick={() => {}}>Music</button>
+                    <button onClick={() => {}}>Sport</button>
                 </div>
                 <div className={Style.filter_box_right}>
                     <div className={Style.filter_box_right_box} onClick={() => setFilter(!filter)}>

@@ -26,11 +26,9 @@ const AuthorTaps = ({ setAuthorTab }) => {
       <div className={Style.authorTaps_box}>
         <div className={Style.authorTaps_box_left}>
           <div className={Style.authorTaps_box_left_btn}>
-            <button className={`${activeBtn == 1 ? Style.active : ""}`} onClick={(e) => openTab({ e, active: 1 })}>Collectiables{""}</button>
-            <button className={`${activeBtn == 2 ? Style.active : ""}`} onClick={(e) => openTab({ e, active: 2 })}>Created{""}</button>
-            <button className={`${activeBtn == 3 ? Style.active : ""}`} onClick={(e) => openTab({ e, active: 3 })}>Liked{""}</button>
-            <button className={`${activeBtn == 4 ? Style.active : ""}`} onClick={(e) => openTab({ e, active: 4 })}>Followers{""}</button>
-            <button className={`${activeBtn == 5 ? Style.active : ""}`} onClick={(e) => openTab({ e, active: 5 })}>Following{""}</button>
+            <button className={`${activeBtn == 1 ? Style.active : ""}`} onClick={(e) => openTab({ e, active: 1 })}>All NFTs{""}</button>
+            <button className={`${activeBtn == 2 ? Style.active : ""}`} onClick={(e) => openTab({ e, active: 2 })}>Listed NFTs{""}</button>
+            <button className={`${activeBtn == 3 ? Style.active : ""}`} onClick={(e) => openTab({ e, active: 3 })}>Unlisted NFTs{""}</button>
           </div>
         </div>
         <div className={Style.authorTaps_box_right}>
