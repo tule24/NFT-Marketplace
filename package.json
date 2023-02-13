@@ -27,6 +27,7 @@
     "react-icons": "^4.7.1",
     "react-toastify": "^9.1.1",
     "supports-color": "7.2.0",
+    "wallet-address-validator": "^0.2.4",
     "web3modal": "^1.9.12"
   },
   "browser": {
