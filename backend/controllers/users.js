@@ -14,12 +14,13 @@ const createUser = async (req, res) => {
             status: "success",
             data: user
         })
+    } else {
+        const newUser = await User.create(req.body)
+        res.status(StatusCodes.CREATED).json({
+            status: "success",
+            data: newUser
+        })
     }
-    const newUser = await User.create(req.body)
-    res.status(StatusCodes.CREATED).json({
-        status: "success",
-        data: newUser
-    })
 }
 
 const updateUser = async (req, res) => {

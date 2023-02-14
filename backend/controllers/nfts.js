@@ -1,4 +1,5 @@
 import NFT from "@backend/models/Nft"
+import { Types } from "mongoose"
 import { StatusCodes } from 'http-status-codes'
 import { NotFoundError } from '@backend/errors'
 
@@ -13,13 +14,14 @@ const createNFT = async (req, res) => {
 const updateNFT = async (req, res) => {
     const { nftID } = req.query
     const nft = await NFT.findByIdAndUpdate(nftID, req.body, { new: true, runValidators: true })
+    const nfts = await NFT.find()
     if (!nft) {
         throw new NotFoundError(`Not found NFT with id ${nftID}`)
     }
 
     res.status(StatusCodes.OK).json({
         status: "success",
-        data: nft
+        data: nfts
     })
 }
 
@@ -46,7 +48,20 @@ const getAllNFT = async (req, res) => {
 
 const getNFT = async (req, res) => {
     const { nftID } = req.query
-    const nft = await NFT.findById(nftID)
+    const nft = await NFT.aggregate([
+        {
+            $match: { _id: Types.ObjectId(nftID) }
+        },
+        {
+            $lookup:
+            {
+                from: 'users',
+                localField: 'owner',
+                foreignField: '_id',
+                as: 'ownerdetail'
+            }
+        }
+    ])
     if (!nft) {
         throw new NotFoundError(`Not found NFT with id ${nftID}`)
     }

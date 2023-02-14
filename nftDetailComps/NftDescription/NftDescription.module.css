@@ -90,7 +90,7 @@
 }
 
 .nftDescription_box_profile_box_left_img,
-.nftDescription_box_profile_box_right_img {
+.nftDescription_box_profile_box_right_img  {
     border-radius: 50%;
 }
 
@@ -102,7 +102,6 @@
     border-left: 1px solid var(--icons-color);
     padding-left: 2rem;
 }
-
 .nftDescription_box_profile_bidding {
     margin-block: 1rem;
 }

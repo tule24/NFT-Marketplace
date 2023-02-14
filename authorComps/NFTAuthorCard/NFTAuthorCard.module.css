@@ -1,0 +1,162 @@
+.NFTAuthorCard {
+    width: 80%;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.NFTAuthorCard_box {
+    display: grid;
+    cursor: pointer;
+    transition: all .2s ease-in;
+    border-radius: 1rem;
+    border: 1px solid var(--shadow-dark-color);
+    overflow: hidden;
+}
+
+.NFTAuthorCard_box:hover {
+    box-shadow: var(--box-shadow);
+}
+
+.NFTAuthorCard_box_like {
+    padding: 1rem;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    z-index: 111;
+}
+
+.NFTAuthorCard_box_like_box_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.NFTAuthorCard_box_like_box_box_icon {
+    color: var(--icons-color);
+    font-size: 2rem;
+}
+
+.NFTAuthorCard_box_like_box_box p {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
+    border-radius: 2rem;
+    padding: 0 .5rem;
+}
+
+.NFTAuthorCard_box_img {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+}
+
+.NFTAuthorCard_box_img_img {
+    border-radius: 1rem;
+    width: 100%;
+    height: 32vh;
+}
+
+.NFTAuthorCard_box_info {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.NFTAuthorCard_box_info_left {
+    line-height: 0;
+}
+
+.NFTAuthorCard_box_info small {
+    font-size: 1rem;
+}
+
+.NFTAuthorCard_box_info_left p {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.NFTAuthorCard_box_price {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    line-height: 0;
+    padding: 1rem;
+}
+
+.NFTAuthorCard_box_price_box p {
+    border: 1px solid var(--icons-color);
+    padding: 1.5rem 1rem 1rem 1rem;
+    font-size: 1.4rem;
+    margin-top: .5rem;
+    border-radius: .3rem;
+}
+
+.NFTAuthorCard_box_price_box small {
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
+    padding: .3rem;
+    border-radius: .3rem;
+    margin-left: 1rem;
+}
+
+.NFTAuthorCard_box_price_stock {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.1rem;
+}
+
+.NFTAuthorCard_box_button {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.NFTAuthorCard_box_button_listing {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.NFTAuthorCard_box_button_listing>.NFTAuthorCard_box_btn {
+    border-right: 1px solid black;
+}
+
+.NFTAuthorCard_box_btn{
+    background-color: var(--icons-color);
+    padding: 1rem;
+    font-size: 1rem;
+    color: var(--shadow-light-color);
+    cursor: pointer;
+    transition: all .2s ease-in;
+    display: block;
+    border: none;
+}
+
+.NFTAuthorCard_box_btn:hover {
+    background-color: rgb(223, 89, 223);
+    color: var(--icons-color);
+}
+
+@media screen and (max-width: 425px) {
+    .NFTAuthorCard {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .NFTAuthorCard {
+        width: 80%;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .NFTAuthorCard {
+        width: 90%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

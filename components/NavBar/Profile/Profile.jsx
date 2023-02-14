@@ -1,14 +1,12 @@
 import React, { useContext } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { FaUserAlt, FaRegImage, FaUserEdit } from 'react-icons/fa'
+import { FaUserAlt, FaUserEdit } from 'react-icons/fa'
 import { MdHelpCenter } from 'react-icons/md'
 import { TbDownload } from 'react-icons/tb'
 import { BiUser } from 'react-icons/bi'
 import Blockies from 'react-blockies'
 // INTERNAL IMPORT 
 import Style from './Profile.module.css'
-import images from '../../../img'
 import { NFTMarketplaceContext } from '../../../Context/NFTMarketplaceContext'
 import { minifyAddress } from '../../../helpers'
 
@@ -40,13 +38,13 @@ const Profile = () => {
           <div className={Style.profile_menu_one_item}>
             <FaUserAlt />
             <p>
-              <Link href={{ pathname: '/my-profile' }}>My Profile</Link>
+              <Link href={{ pathname: '/author' }}>My Profile</Link>
             </p>
           </div>
           <div className={Style.profile_menu_one_item}>
             <FaUserEdit />
             <p>
-              <Link href={{ pathname: '/edit-profile' }}>Edit Profile</Link>
+              <Link href={{ pathname: '/account' }}>Edit Profile</Link>
             </p>
           </div>
         </div>
@@ -54,13 +52,13 @@ const Profile = () => {
           <div className={Style.profile_menu_one_item}>
             <MdHelpCenter />
             <p>
-              <Link href={{ pathname: '/help' }}>Help</Link>
+              Help
             </p>
           </div>
           <div className={Style.profile_menu_one_item}>
             <TbDownload />
             <p>
-              <Link href={{ pathname: '/disconnect' }}>Disconnect</Link>
+              Disconnect
             </p>
           </div>
         </div>

@@ -3,6 +3,7 @@ const connection = {}
 
 const connectDB = async () => {
     if (connection.isConnected) {
+        console.log("is connected")
         return;
     }
     mongoose.set('strictQuery', false)

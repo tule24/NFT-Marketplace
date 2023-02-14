@@ -17,6 +17,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
     const [signer, setSigner] = useState(null)
     const [loading, setLoading] = useState(false)
     const [nfts, setNfts] = useState([])
+    const [nftDetail, setNftDetail] = useState(null)
     const { theme, setTheme } = useTheme()
     const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_GOERLI_URL);
 
@@ -71,9 +72,9 @@ export const NFTMarketplaceProvider = (({ children }) => {
             });
             if (response.status === 201) {
                 const json = await response.json()
-                const tokenURI = ipfsToHTTPS(json.uri)
-                console.log("tokenURI: ", tokenURI)
-                return tokenURI
+                const uri = ipfsToHTTPS(json.uri)
+                console.log("tokenURI: ", uri)
+                return uri
             }
         } catch (e) {
             console.log(e)
@@ -85,14 +86,19 @@ export const NFTMarketplaceProvider = (({ children }) => {
     const mintNFT = async (nftData) => {
         try {
             setLoading(true)
-            const tokenURI = await storeNFT(nftData)
+            const uri = await storeNFT(nftData)
             const contract = fetchContract(signer)
-            const transaction = await contract.mintToken(tokenURI)
+            const transaction = await contract.mintToken(uri)
             const receipt = await transaction.wait()
-            const tokenID = Number(receipt.events[1].args[0])
-            setLoading(false)
-            if (tokenID) {
-                toast.success(`😁 A NFT was minted with a token ID of ${tokenID} 😁`)
+            const tokenId = Number(receipt.events[1].args[0])
+            if (tokenId) {
+                setLoading(false)
+                let { data: { image } } = await axios.get(uri)
+                image = ipfsToHTTPS(image)
+                const { name, description, collections } = nftData
+                await axios.post('/api/nft', { tokenId, name, description, image, owner: currentAccount.wallet, collections, uri })
+                await getALLNFT()
+                toast.success(`😁 A NFT was minted with a token ID of ${tokenId} 😁`)
             }
         } catch (error) {
             console.log(error)
@@ -101,13 +107,17 @@ export const NFTMarketplaceProvider = (({ children }) => {
         }
     }
     // list NFT
-    const listNFT = async (tokenID, price) => {
+    const listNFT = async (id, tokenID, price) => {
         try {
             setLoading(true)
             const wei = ethers.utils.parseEther(price);
             const contract = fetchContract(signer)
             const transaction = await contract.listNftItem(tokenID, wei, { value: ethers.utils.parseEther("0.0015") })
             await transaction.wait()
+            const res = await axios.patch(`/api/nft/${id}`, { listing: true, price })
+            if (res.status === 200) {
+                setNfts(res.data.data)
+            }
             setLoading(false)
             toast(`😁 A NFT with the token ID ${tokenID} was listed at a price of ${price} ETH 😁`)
         } catch (e) {
@@ -117,12 +127,16 @@ export const NFTMarketplaceProvider = (({ children }) => {
         }
     }
     // unlist NFT
-    const unlistNFT = async (tokenID) => {
+    const unlistNFT = async (id, tokenID) => {
         try {
             setLoading(true)
             const contract = fetchContract(signer)
             const transaction = await contract.unlistNftItem(tokenID)
             await transaction.wait()
+            const res = await axios.patch(`/api/nft/${id}`, { listing: false })
+            if (res.status === 200) {
+                setNfts(res.data.data)
+            }
             setLoading(false)
             toast(`😁 A NFT with the token ID ${tokenID} was unlisted 😁`)
         } catch (e) {
@@ -133,15 +147,19 @@ export const NFTMarketplaceProvider = (({ children }) => {
 
     }
     // update price NFT
-    const updatePriceNFT = async (tokenID, price) => {
+    const updatePriceNFT = async (id, tokenID, price) => {
         try {
             setLoading(true)
             const contract = fetchContract(signer)
             const wei = ethers.utils.parseEther(price);
             const transaction = await contract.updateItemPrice(tokenID, wei)
             await transaction.wait()
-            toast(`😁 A NFT with the token ID ${tokenID} was updated price to ${price} ETH 😁`)
+            const res = await axios.patch(`/api/nft/${id}`, { price: price })
+            if (res.status === 200) {
+                setNfts(res.data.data)
+            }
             setLoading(false)
+            toast(`😁 A NFT with the token ID ${tokenID} was updated price to ${price} ETH 😁`)
         } catch (e) {
             console.log(e)
             setLoading(false)
@@ -150,14 +168,19 @@ export const NFTMarketplaceProvider = (({ children }) => {
 
     }
     // buy NFT
-    const buyNFT = async (tokenID, price) => {
+    const buyNFT = async (nft) => {
         try {
+            const { _id, tokenId, price } = nft
             setLoading(true)
             const contract = fetchContract(signer)
-            const transaction = await contract.buyNftItem(tokenID, { value: ethers.utils.parseEther(price) })
+            const transaction = await contract.buyNftItem(tokenId, { value: ethers.utils.parseEther(String(price)) })
             await transaction.wait()
+            const res = await axios.patch(`/api/nft/${_id}`, { owner: currentAccount.wallet, listing: false })
+            if (res.status === 200) {
+                setNfts(res.data.data)
+            }
             setLoading(false)
-            toast(`😁 A NFT with the token ID ${tokenID} was sold at price of ${price} ETH 😁`)
+            toast(`😁 A NFT with the token ID ${tokenId} was sold at price of ${price} ETH 😁`)
         } catch (e) {
             console.log(e)
             setLoading(false)
@@ -167,52 +190,52 @@ export const NFTMarketplaceProvider = (({ children }) => {
 
     // FECTH DATA FROM CONTRACT
     // get total NFT was minted
-    const getTotalSupply = async () => {
-        try {
-            const contract = fetchContract(provider);
-            const total = await contract.getTotalSupply()
-            console.log(Number(total))
-            return total
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getTotalSupply = async () => {
+    //     try {
+    //         const contract = fetchContract(provider);
+    //         const total = await contract.getTotalSupply()
+    //         console.log(Number(total))
+    //         return total
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
     // get NFT by tokenID
     const getNFTItem = async (_tokenID) => {
         try {
             const contract = fetchContract(provider);
             const nft = await contract.getNFTItem(_tokenID)
-            const res = await formatData(contract, nft)
-            console.log(res)
-            return nft
+            // const res = await formatData(contract, nft)
+            console.log(nft)
+            // return nft
         } catch (e) {
             console.log(e)
         }
     }
-    // get all NFT was listed
-    const getAllNFTItem = async () => {
-        try {
-            const contract = fetchContract(provider);
-            const allNFT = await contract.getAllNFTItem()
-            const res = await formatData(contract, allNFT)
-            console.log(res)
-            return allNFT
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // // get all NFT was listed
+    // const getAllNFTItem = async () => {
+    //     try {
+    //         const contract = fetchContract(provider);
+    //         const allNFT = await contract.getAllNFTItem()
+    //         const res = await formatData(contract, allNFT)
+    //         console.log(res)
+    //         return allNFT
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
     // get all user NFT 
-    const getMyNFT = async () => {
-        try {
-            const contract = fetchContract(signer);
-            const userNFT = await contract.getMyNFT()
-            const res = await Promise.all(userNFT.map(async (nft) => await formatData(contract, nft)))
-            console.log(res)
-            return userNFT
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getMyNFT = async () => {
+    //     try {
+    //         const contract = fetchContract(signer);
+    //         const userNFT = await contract.getMyNFT()
+    //         const res = await Promise.all(userNFT.map(async (nft) => await formatData(contract, nft)))
+    //         console.log(res)
+    //         return userNFT
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
     // format data & get in4 from ipfs
     const formatData = async (contract, data) => {
         const { tokenId, seller, owner, price } = data
@@ -226,6 +249,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
         return { name, description, newImage, seller, owner, newPrice, tokenURI }
     }
 
+    // FECTH DATA FROM BACKEND
     // get all nft
     const getALLNFT = async () => {
         try {
@@ -248,7 +272,6 @@ export const NFTMarketplaceProvider = (({ children }) => {
             const res = await axios.post('/api/user', data)
             if (res.status <= 201) {
                 const data = res.data.data
-                console.log(data)
                 setCurrentAccount(data)
             }
         } catch (error) {
@@ -256,6 +279,31 @@ export const NFTMarketplaceProvider = (({ children }) => {
         }
     }
 
+    // update user
+    const updateUser = async (userUpdate) => {
+        try {
+            const res = await axios.patch(`/api/user/${currentAccount._id}`, userUpdate)
+            if (res.status <= 200) {
+                const data = res.data.data
+                setCurrentAccount(data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // get a NFT
+    const getNFTDetail = async (nftID) => {
+        try {
+            const res = await axios.get(`/api/nft/${nftID}`)
+            if (res.status === 200) {
+                const data = res.data.data[0]
+                setNftDetail(data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
     useEffect(() => {
         checkWalletConnected()
         window.ethereum.on('accountsChanged', handleAccountChange)
@@ -269,6 +317,8 @@ export const NFTMarketplaceProvider = (({ children }) => {
                 theme,
                 loading,
                 nfts,
+                nftDetail,
+                updateUser,
                 setLoading,
                 setTheme,
                 connectWallet,
@@ -277,10 +327,8 @@ export const NFTMarketplaceProvider = (({ children }) => {
                 unlistNFT,
                 updatePriceNFT,
                 buyNFT,
-                getTotalSupply,
-                getNFTItem,
-                getAllNFTItem,
-                getMyNFT
+                getNFTDetail,
+                getNFTItem
             }}>
             {children}
         </NFTMarketplaceContext.Provider>

@@ -9,7 +9,7 @@ import Style from './UploadNFT.module.css'
 import formStyle from '../accountComps/AccountForm/AccountForm.module.css'
 import { Button } from '../components'
 import { DropZone } from './index'
-import { categoryArr } from './UploadNFTData'
+import { collectionArr } from './UploadNFTData'
 import { NFTMarketplaceContext } from '../Context/NFTMarketplaceContext'
 const UploadNFT = () => {
   const [active, setActive] = useState(null)
@@ -19,7 +19,7 @@ const UploadNFT = () => {
     description: "",
     royalties: "",
     properties: "",
-    category: "",
+    collections: "",
     image: null,
   })
   const { mintNFT } = useContext(NFTMarketplaceContext)
@@ -76,8 +76,8 @@ const UploadNFT = () => {
             Choose an exciting collection or create a new one
           </p>
           <div className={Style.upload_box_slider_div}>
-            {categoryArr.map((el, i) => (
-              <div className={`${Style.upload_box_slider} ${active === i ? Style.active : ""}`} key={i} onClick={() => { setActive(i); setNftData({ ...nftData, category: i }); }}>
+            {collectionArr.map((el, i) => (
+              <div className={`${Style.upload_box_slider} ${active === i ? Style.active : ""}`} key={i} onClick={() => { setActive(i); setNftData({ ...nftData, collections: el.collections }); }}>
                 <div className={Style.upload_box_slider_box}>
                   <div className={Style.upload_box_slider_box_img}>
                     <Image src={el.image} alt="background image" width={70} height={70} className={Style.upload_box_slider_box_img_img} />
@@ -86,7 +86,7 @@ const UploadNFT = () => {
                     <TiTick />
                   </div>
                 </div>
-                <p>{el.category}</p>
+                <p>{el.collections}</p>
               </div>
             ))}
           </div>

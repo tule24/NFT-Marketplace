@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 // INTERNAL IMPORT
 import Style from './NftDetailPage.module.css'
-import { NftDescription, NftDetailImg, NftTabs } from './index'
+import { NftDescription, NftDetailImg } from './index'
 const NftDetailPage = () => {
   return (
     <div className={Style.nftDetailPage}>

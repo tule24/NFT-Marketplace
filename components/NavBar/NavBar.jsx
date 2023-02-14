@@ -4,13 +4,12 @@ import Link from 'next/link'
 import 'react-toastify/dist/ReactToastify.css'
 import Blockies from 'react-blockies'
 // IMPORT ICON
-import { MdNotifications } from 'react-icons/md'
 import { BsSearch } from 'react-icons/bs'
 import { CgMenuRight } from 'react-icons/cg'
 import { CiLight, CiDark } from 'react-icons/ci'
 // INTERNAL IMPORT
 import Style from './NavBar.module.css'
-import { Discover, HelpCenter, Notification, Profile, SideBar } from './index'
+import { Discover, HelpCenter, Profile, SideBar } from './index'
 import { Button } from '../index'
 import images from '../../img'
 import { NFTMarketplaceContext } from '../../Context/NFTMarketplaceContext'
@@ -20,7 +19,7 @@ import { BiUser } from 'react-icons/bi'
 const NavBar = () => {
   const [profile, setProfile] = useState(false)
   const [openSideMenu, setOpenSideMenu] = useState(false)
-  const { connectWallet, currentAccount, setTheme, theme } = useContext(NFTMarketplaceContext)
+  const { connectWallet, currentAccount, setTheme, theme, getNFTItem } = useContext(NFTMarketplaceContext)
 
   const openSideBar = () => {
     if (!openSideMenu) {
@@ -38,31 +37,36 @@ const NavBar = () => {
     }
   }
 
+  const [tokenId, setTokenId] = useState()
+
   return (
     <div className={Style.navbar}>
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
           <div className={Style.logo}>
-            <Image src={images.logo} alt="NFT MARKET PLACE" width={100} height={100} />
+            <Link href={{ pathname: '/' }}>
+              <Image src={images.logo} alt="NFT MARKET PLACE" width={100} height={100} />
+            </Link>
           </div>
           <div className={Style.navbar_container_left_box_input}>
             <div className={Style.navbar_container_left_box_input_box}>
-              <input type="text" placeholder='Search NFT' />
-              <BsSearch onClick={() => { }} className={Style.search_icon} />
+              <input type="text" placeholder='Search NFT' onChange={(e) => setTokenId(Number(e.target.value))} />
+              <BsSearch className={Style.search_icon} />
             </div>
           </div>
+          <button onClick={() => getNFTItem(tokenId)}>GET NFT ITEM</button>
         </div>
         <div className={Style.navbar_container_right}>
           {/* DISCOVER MENU */}
           <div className={Style.navbar_container_right_discover}>
-            <p onClick={(e) => { openMenu(e) }}>Discover</p>
+            <p>Discover</p>
             <div className={Style.navbar_container_right_discover_box}>
               <Discover />
             </div>
           </div>
           {/* HELP CENTER MENU */}
           <div className={Style.navbar_container_right_help}>
-            <p onClick={(e) => { openMenu(e) }}>Help Center</p>
+            <p>Help Center</p>
             <div className={Style.navbar_container_right_help_box}>
               <HelpCenter />
             </div>
@@ -71,15 +75,15 @@ const NavBar = () => {
           <div className={Style.navbar_container_right_button}>
             {currentAccount ? (
               <Link href={{ pathname: 'uploadNFT' }}>
-                <Button btnName="Create" handleClick={() => { }} /></Link>
+                <Button btnName="Create" /></Link>
             ) : <Button btnName="Connect" handleClick={connectWallet} />}
           </div>
           {/* BUTTON CHANGE THEME */}
           <div className={Style.navbar_container_theme_button}>
             <input type="checkbox" id="theme" className={Style.navbar_container_theme_button_checkbox} onChange={() => changeTheme()} />
             <label htmlFor="theme" className={Style.navbar_container_theme_button_label}>
-              <CiLight className={Style.navbar_container_theme_button_light} />
               <CiDark className={Style.navbar_container_theme_button_dark} />
+              <CiLight className={Style.navbar_container_theme_button_light} />
             </label>
           </div>
           {/* USER PROFILE */}
@@ -117,7 +121,7 @@ const NavBar = () => {
           </div>
         )
       }
-      <ToastContainer closeButton={true} theme={theme} position='top-center' />
+      <ToastContainer closeButton={true} theme={theme} position='top-center' style={{ width: "max-content" }} />
     </div>
   )
 }

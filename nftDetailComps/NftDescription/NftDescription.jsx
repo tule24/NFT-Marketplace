@@ -1,45 +1,36 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { MdVerified, MdCloudUpload, MdTimer, MdReportProblem, MdOutlineDeleteSweep } from 'react-icons/md'
+import { MdVerified, MdCloudUpload, MdTimer } from 'react-icons/md'
 import { BsThreeDots } from 'react-icons/bs'
-import { FaWallet, FaPercentage } from 'react-icons/fa'
-import { TiSocialFacebook, TiSocialTwitter, TiSocialYoutube, TiSocialInstagram, TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti'
-import { BiTransferAlt, BiDollar } from 'react-icons/bi'
+import { FaWallet } from 'react-icons/fa'
+import { TiSocialFacebook, TiSocialTwitter, TiSocialYoutube, TiSocialInstagram } from 'react-icons/ti'
+import Blockies from 'react-blockies'
 // INTERNAL IMPORT
 import Style from './NftDescription.module.css'
 import images from '../../img'
 import { Button } from '../../components'
 import { NftTabs } from '../index'
+import { NFTMarketplaceContext } from 'Context/NFTMarketplaceContext'
+import { minifyAddress, eth2usd } from 'helpers'
 const NftDescription = () => {
   const [social, setSocial] = useState(false)
-  const [nftMenu, setNftMenu] = useState(false)
   const [tab, setTab] = useState('history')
+  const [usd, setUsd] = useState(0)
   const historyArray = [1, 2, 3, 4, 5]
   const provananceArray = [6, 7, 8, 9, 10]
-  const owner = [1, 3, 5, 7, 9]
-  const openSocial = () => {
-    if(!social) {
-      setSocial(true)
-      setNftMenu(false)
-    } else {
-      setSocial(false)
-    }
-  }
-  const openNftMenu = () => {
-    if(!nftMenu) {
-      setNftMenu(true)
-      setSocial(false)
-    } else {
-      setNftMenu(false)
-    }
-  }
+  const owners = [1, 3, 5, 7, 9]
+  const { nftDetail, buyNFT, currentAccount } = useContext(NFTMarketplaceContext)
+
+  useEffect(() => {
+    nftDetail && eth2usd(nftDetail.price).then((res) => setUsd(res))
+  }, [nftDetail])
   return (
     <div className={Style.nftDescription}>
       <div className={Style.nftDescription_box}>
         <div className={Style.nftDescription_box_share}>
           <p>Virtual Worlds</p>
           <div className={Style.nftDescription_box_share_box}>
-            <MdCloudUpload className={Style.nftDescription_box_share_box_icon} onClick={() => openSocial()} />
+            <MdCloudUpload className={Style.nftDescription_box_share_box_icon} onClick={() => setSocial(!social)} />
             {social && (
               <div className={Style.nftDescription_box_share_box_social}>
                 <a href="#">
@@ -56,37 +47,29 @@ const NftDescription = () => {
                 </a>
               </div>
             )}
-            <BsThreeDots className={Style.nftDescription_box_share_box_icon} onClick={() => openNftMenu()} />
-            {nftMenu && (
-              <div className={Style.nftDescription_box_share_box_social}>
-                <a href="#"><BiDollar />Change Price</a>
-                <a href="#"><BiTransferAlt />Transfer</a>
-                <a href="#"><MdReportProblem />Report abouse</a>
-                <a href="#"><MdOutlineDeleteSweep />Delete item</a>
-              </div>
-            )}
+            <BsThreeDots className={Style.nftDescription_box_share_box_icon} />
           </div>
         </div>
         <div className={Style.nftDescription_box_profile}>
-          <h1>BearX #23453</h1>
+          <h1>{nftDetail?.name} #{nftDetail?.tokenId}</h1>
           <div className={Style.nftDescription_box_profile_box}>
             <div className={Style.nftDescription_box_profile_box_left}>
-              <Image src={images.user1} alt='ava' width={40} height={40} className={Style.nftDescription_box_profile_box_left_img} />
+              <Blockies seed={nftDetail?.owner.toLowerCase()} className={Style.nftDescription_box_profile_box_left_img} />
               <div className={Style.nftDescription_box_profile_box_left_info}>
-                <small>Creator</small> <br />
-                <span>Karli Costa <MdVerified color='green'/></span>
+                <small>Owner</small> <br />
+                <span title={nftDetail?.owner}>{nftDetail?.owner && minifyAddress(nftDetail?.owner)} <MdVerified color='green' /></span>
               </div>
             </div>
             <div className={Style.nftDescription_box_profile_box_right}>
-              <Image src={images.user2} alt='ava' width={40} height={40} className={Style.nftDescription_box_profile_box_right_img} />
+              <Image src={images.collection} alt='ava' width={40} height={40} className={Style.nftDescription_box_profile_box_right_img} />
               <div className={Style.nftDescription_box_profile_box_right_info}>
-                <small>Creator</small> <br />
-                <span>Karli Costa <MdVerified color='green'/></span>
+                <small>Collection</small> <br />
+                <span>{nftDetail?.collections}</span>
               </div>
             </div>
           </div>
           <div className={Style.nftDescription_box_profile_bidding}>
-            <p><MdTimer /> <span>Auction ending in: </span></p>
+            <p><MdTimer /> <span>Auction ending in (coming soon): </span></p>
             <div className={Style.nftDescription_box_profile_bidding_timer}>
               <div className={Style.nftDescription_box_profile_bidding_timer_item}>
                 <p>22</p>
@@ -107,14 +90,13 @@ const NftDescription = () => {
             </div>
             <div className={Style.nftDescription_box_profile_bidding_price}>
               <div className={Style.nftDescription_box_profile_bidding_price_bid}>
-                <small>Current Bid</small>
-                <p>1.000 ETH <span>(≈ $3,221.22)</span></p>
+                <small>Price </small>
+                <p><span style={{color: "yellow"}}>{nftDetail?.price}</span>ETH <span>(≈ {usd !== 0 ? usd : ''}  usd)</span></p>
               </div>
-              <span>[96 in stock]</span>
             </div>
             <div className={Style.nftDescription_box_profile_bidding_btn}>
-              <Button btnName="Place a bid" icon={<FaWallet />} handleClick={() => { }} classStyle={Style.button} />
-              <Button btnName="Make offer" icon={<FaPercentage />} handleClick={() => { }} classStyle={Style.button} />
+              {nftDetail && nftDetail.owner !== currentAccount.wallet && <Button btnName="Buy NFT" icon={<FaWallet />} handleClick={() => buyNFT(nftDetail)} classStyle={Style.button} />}
+              {/* <Button btnName="Make offer" icon={<FaPercentage />} handleClick={() => { }} classStyle={Style.button} /> */}
             </div>
             <div className={Style.nftDescription_box_profile_bidding_tabs}>
               <button onClick={() => setTab('history')}>Bid History</button>
@@ -133,7 +115,7 @@ const NftDescription = () => {
             )}
             {tab === 'owner' && (
               <div className={Style.nftDescription_box_profile_bidding_card}>
-                <NftTabs dataTab={owner} icon={<MdVerified color='green'/>}/>
+                <NftTabs dataTab={owners} icon={<MdVerified color='green' />} />
               </div>
             )}
           </div>

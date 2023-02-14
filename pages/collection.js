@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 //INTERNAL IMPORT
 import Style from '../styles/Collection.module.css'
 import { CollectionProfile, NFTCardTwo } from '../collectionComps'
-import { Filter } from '../components'
 import { NFTMarketplaceContext } from 'Context/NFTMarketplaceContext'
 
 const collection = () => {
@@ -10,7 +9,6 @@ const collection = () => {
   return (
     <div className={Style.collection}>
       <CollectionProfile />
-      <Filter />
       <NFTCardTwo nfts={nfts} />
     </div>
   )

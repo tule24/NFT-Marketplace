@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Image from 'next/image'
 import { MdVerified, MdCloudUpload, MdOutlineReportProblem } from 'react-icons/md'
 import { FiCopy } from 'react-icons/fi'
@@ -8,9 +8,11 @@ import { TiSocialFacebook, TiSocialTwitter, TiSocialYoutube, TiSocialInstagram }
 import Style from './AuthorProfileCard.module.css'
 import images from '../../img'
 import { Button } from '../../components'
+import { NFTMarketplaceContext } from 'Context/NFTMarketplaceContext'
 const AuthorProfileCard = () => {
     const [report, setReport] = useState(false)
     const [share, setShare] = useState(false)
+    const { currentAccount } = useContext(NFTMarketplaceContext)
 
     const copyAddress = () => {
         const copyText = document.getElementById("myAddress")
@@ -19,7 +21,7 @@ const AuthorProfileCard = () => {
     }
 
     const openShare = () => {
-        if(!share) {
+        if (!share) {
             setShare(true)
             setReport(false)
         } else {
@@ -28,7 +30,7 @@ const AuthorProfileCard = () => {
     }
 
     const openReport = () => {
-        if(!report) {
+        if (!report) {
             setReport(true)
             setShare(false)
         } else {
@@ -43,12 +45,12 @@ const AuthorProfileCard = () => {
                     <Image src={images.nft_image_1} className={Style.authorProfileCard_box_img_img} alt="NFT Images" width={220} height={220} />
                 </div>
                 <div className={Style.authorProfileCard_box_info}>
-                    <h2>Dony Herrera{""}<span><MdVerified color='green'/></span>{""}</h2>
+                    <h2>{currentAccount?.name}{""}<span><MdVerified color='green' /></span>{""}</h2>
                     <div className={Style.authorProfileCard_box_info_address}>
-                        <input type="text" value="0x829DASD9WEW12F5656ASF6...A45" id='myAddress' readOnly={true} />
+                        <input type="text" value={currentAccount?.wallet} id='myAddress' readOnly={true} />
                         <FiCopy onClick={() => copyAddress()} className={Style.authorProfileCard_box_info_address_icon} />
                     </div>
-                    <p>Punk #4768 / An OG Cryptopunk Collector, header of NFTs. Contributin to @ether_Cards, an NFT Monetization Platform</p>
+                    <p>{currentAccount?.description}</p>
                     <div className={Style.authorProfileCard_box_info_social}>
                         <a href="#">
                             <TiSocialFacebook />
@@ -65,8 +67,8 @@ const AuthorProfileCard = () => {
                     </div>
                 </div>
                 <div className={Style.authorProfileCard_box_share}>
-                    <Button btnName="Follow" handleClick={() => {}} />
-                    <MdCloudUpload onClick={() => openShare()} className={Style.authorProfileCard_box_share_icon}/>
+                    <Button btnName="Follow" handleClick={() => { }} />
+                    <MdCloudUpload onClick={() => openShare()} className={Style.authorProfileCard_box_share_icon} />
                     {share && (
                         <div className={Style.authorProfileCard_box_share_upload}>
                             <p>
@@ -83,13 +85,13 @@ const AuthorProfileCard = () => {
                             </p>
                         </div>
                     )}
-                    <BsThreeDots onClick={() => openReport()} className={Style.authorProfileCard_box_share_icon}/>
+                    <BsThreeDots onClick={() => openReport()} className={Style.authorProfileCard_box_share_icon} />
                     {report && (
-                            <p className={Style.authorProfileCard_box_share_report}>
-                                <span>
-                                    <MdOutlineReportProblem />{""}Report about
-                                </span>
-                            </p>
+                        <p className={Style.authorProfileCard_box_share_report}>
+                            <span>
+                                <MdOutlineReportProblem />{""}Report about
+                            </span>
+                        </p>
                     )}
                 </div>
             </div>

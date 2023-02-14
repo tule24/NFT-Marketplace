@@ -1,29 +1,25 @@
 import images from '../img'
-const categoryArr = [
+const collectionArr = [
     {
-        image: images.nft_image_1,
-        category: "Sports"
+        image: images.collection_art,
+        collections: "Art"
     },
     {
-        image: images.nft_image_2,
-        category: "Arts"
+        image: images.collection_cinematic,
+        collections: "Cinematic"
     },
     {
-        image: images.nft_image_3,
-        category: "Music"
+        image: images.collection_digital,
+        collections: "Digital"
     },
     {
-        image: images.nft_image_1,
-        category: "Digital"
+        image: images.collection_music,
+        collections: "Music"
     },
     {
-        image: images.nft_image_2,
-        category: "Time"
-    },
-    {
-        image: images.nft_image_3,
-        category: "Photography"
+        image: images.collection_sport,
+        collections: "Sport"
     },
 ]
 
-export { categoryArr }
+export { collectionArr }

@@ -1,0 +1,87 @@
+.modalPrice {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: auto;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.modalPrice_header {
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    background-color: black;
+}
+
+.modalPrice_close {
+    background-color: black;
+    border: none;
+    border-left: 1px solid white;
+    outline: none;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.modalPrice_close:hover {
+    background-color: rgba(255, 255, 255, .5);
+}
+
+.modalPrice_content {
+    background-color: rgba(255, 255, 255, .2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+}
+
+.modalPrice_content p {
+    font-style: italic;
+    color: yellow;
+    margin-bottom: 2rem;
+    margin-top: .2rem;
+}
+.modalPrice_input {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.modalPrice_input input {
+    font-size: 1.5rem;
+    padding: .5rem;
+    width: 8rem;
+}
+
+.modalPrice_input span {
+    font-size: 1.5rem;
+}
+
+.modalPrice_content h2 {
+    margin-block: 0;
+}
+
+.modalPrice_btn {
+    background-color: var(--icons-color);
+    padding: .5rem 1.5rem;
+    border: 1px solid var(--icons-color);
+    font-size: 1.2rem;
+    color: var(--shadow-light-color);
+    cursor: pointer;
+    transition: all .2s ease-in;
+    margin: 1rem .2rem .2rem;
+}
+
+
+.modalPrice_btn:hover {
+    background-color: var(--main-bg-color);
+    border: 1px solid var(--icons-color);
+    color: var(--icons-color);
+}

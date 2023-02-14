@@ -72,6 +72,7 @@
     cursor: pointer;
     font-weight: 600;
 }
+
 .navbar_container_right_help:hover .navbar_container_right_help_box {
     display: block;
 }
@@ -166,12 +167,12 @@
 }
 
 .navbar_container_theme_button_checkbox:checked+label,
-.navbar_container_theme_button_sideBar_checkbox:checked + label {
+.navbar_container_theme_button_sideBar_checkbox:checked+label {
     background: #242424;
 }
 
 .navbar_container_theme_button_checkbox:checked+label::after,
-.navbar_container_theme_button_sideBar_checkbox:checked + label::after {
+.navbar_container_theme_button_sideBar_checkbox:checked+label::after {
     left: 64px;
     transform: translateX(-100%);
     background-color: var(--main-bg-color);
@@ -216,15 +217,15 @@
 
 .navbar_container_theme_button_light,
 .navbar_container_theme_button_sideBar_light {
-    left: -39px;
-    color: #fff;
+    left: -8px;
+    color: #555;
     transition: all .2s linear;
 }
 
 .navbar_container_theme_button_dark,
 .navbar_container_theme_button_sideBar_dark {
-    left: -8px;
-    color: #555;
+    left: -39px;
+    color: #fff;
     transition: all .2s linear;
 }
 

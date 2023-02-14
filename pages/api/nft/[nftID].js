@@ -5,7 +5,6 @@ import { ForbiddenError } from '@backend/errors'
 
 connectDB()
 const handler = async (req, res, next) => {
-    const { nftID } = req.query
     switch (req.method) {
         case "GET": {
             await getNFT(req, res)

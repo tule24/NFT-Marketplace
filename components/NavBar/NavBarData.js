@@ -4,10 +4,6 @@ const discover = [
         link: "collection"
     },
     {
-        name: "Search",
-        link: "search"
-    },
-    {
         name: "My Profile",
         link: "author"
     },

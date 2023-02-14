@@ -23,9 +23,8 @@ const nftsSchema = new Schema({
         default: 0
     },
     owner: {
-        type: Types.ObjectId,
-        ref: 'User',
-        require: [true, "Provide nft owner ID"]
+        type: String,
+        require: [true, "Provide nft owner wallet"]
     },
     like: {
         type: Number,
@@ -33,7 +32,8 @@ const nftsSchema = new Schema({
     },
     collections: {
         type: String,
-        default: "Art"
+        default: "Art",
+        enum: ["Art", "Sport", "Music", "Cinematic", "Digital"]
     },
     listing: {
         type: Boolean,

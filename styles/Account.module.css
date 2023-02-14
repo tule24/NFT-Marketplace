@@ -22,12 +22,12 @@
 }
 
 .account_box {
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 5fr;
     margin-top: 3rem;
     gap: 3rem;
+    display: flex;
+    justify-content: center;
     align-items: flex-start;
 }
 
