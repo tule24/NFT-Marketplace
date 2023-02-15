@@ -4,7 +4,6 @@ import { TiSocialFacebook, TiSocialTwitter, TiSocialYoutube, TiSocialInstagram }
 
 // INTERNAL IMPORT
 import Style from './CollectionProfile.module.css'
-import images from '../../img'
 import { collectionData } from '../collections'
 const CollectionProfile = () => {
   const [curCollection, setCurCollection] = useState(0)

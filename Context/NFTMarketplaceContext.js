@@ -201,17 +201,17 @@ export const NFTMarketplaceProvider = (({ children }) => {
     //     }
     // }
     // get NFT by tokenID
-    const getNFTItem = async (_tokenID) => {
-        try {
-            const contract = fetchContract(provider);
-            const nft = await contract.getNFTItem(_tokenID)
-            // const res = await formatData(contract, nft)
-            console.log(nft)
-            // return nft
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getNFTItem = async (_tokenID) => {
+    //     try {
+    //         const contract = fetchContract(provider);
+    //         const nft = await contract.getNFTItem(_tokenID)
+    //         // const res = await formatData(contract, nft)
+    //         console.log(nft)
+    //         // return nft
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
     // // get all NFT was listed
     // const getAllNFTItem = async () => {
     //     try {
@@ -237,17 +237,17 @@ export const NFTMarketplaceProvider = (({ children }) => {
     //     }
     // }
     // format data & get in4 from ipfs
-    const formatData = async (contract, data) => {
-        const { tokenId, seller, owner, price } = data
-        let tokenURI = await contract.tokenURI(tokenId)
-        if (tokenURI.startsWith("ipfs://")) {
-            tokenURI = ipfsToHTTPS(tokenURI)
-        }
-        const { data: { name, description, image } } = await axios.get(tokenURI)
-        const newImage = ipfsToHTTPS(image)
-        const newPrice = ethers.utils.formatUnits(price.toString(), "ether")
-        return { name, description, newImage, seller, owner, newPrice, tokenURI }
-    }
+    // const formatData = async (contract, data) => {
+    //     const { tokenId, seller, owner, price } = data
+    //     let tokenURI = await contract.tokenURI(tokenId)
+    //     if (tokenURI.startsWith("ipfs://")) {
+    //         tokenURI = ipfsToHTTPS(tokenURI)
+    //     }
+    //     const { data: { name, description, image } } = await axios.get(tokenURI)
+    //     const newImage = ipfsToHTTPS(image)
+    //     const newPrice = ethers.utils.formatUnits(price.toString(), "ether")
+    //     return { name, description, newImage, seller, owner, newPrice, tokenURI }
+    // }
 
     // FECTH DATA FROM BACKEND
     // get all nft
@@ -265,9 +265,10 @@ export const NFTMarketplaceProvider = (({ children }) => {
     // create user
     const createUser = async (wallet) => {
         try {
+            const name = `User ${wallet.substring(wallet.length - 4)}`
             const data = {
-                name: wallet,
-                wallet: wallet
+                name,
+                wallet
             }
             const res = await axios.post('/api/user', data)
             if (res.status <= 201) {
@@ -328,7 +329,6 @@ export const NFTMarketplaceProvider = (({ children }) => {
                 updatePriceNFT,
                 buyNFT,
                 getNFTDetail,
-                getNFTItem
             }}>
             {children}
         </NFTMarketplaceContext.Provider>

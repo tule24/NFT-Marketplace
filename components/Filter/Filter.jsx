@@ -26,7 +26,7 @@ const Filter = () => {
                     </div>
                 </div>
             </div>
-            {
+            {/* {
                 filter && (
                     <div className={Style.filter_box_items}>
                         <div className={Style.filter_box_items_box}>
@@ -61,7 +61,7 @@ const Filter = () => {
                         </div>
                     </div>
                 )
-            }
+            } */}
         </div>
     )
 }

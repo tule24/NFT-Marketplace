@@ -15,6 +15,10 @@
     cursor: pointer;
 }
 
+.upload_box_slider:hover {
+    box-shadow: var(--box-shadow);
+}
+
 .upload_box_slider_box {
     display: flex;
     align-items: center;

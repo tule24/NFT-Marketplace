@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { AiFillHeart, AiFillCloseCircle } from 'react-icons/ai'
-import { MdVerified } from 'react-icons/md'
-import { TiTick } from 'react-icons/ti'
+import { AiFillHeart, AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
 import { FaEthereum } from 'react-icons/fa'
-import { BsImages } from 'react-icons/bs'
-import { FaFilter, FaAngleDown, FaAngleUp, FaWallet, FaMusic, FaVideo, FaImages, FaUserAlt } from 'react-icons/fa'
+import { BsImages, BsFillCalendar2DateFill } from 'react-icons/bs'
+import { FaFilter, FaAngleDown, FaAngleUp } from 'react-icons/fa'
+import { IoLogoUsd } from 'react-icons/io'
 import Link from 'next/link'
 //INTERNAL IMPORT
 import Style from './Card.module.css'
@@ -12,9 +11,15 @@ import Style from './Card.module.css'
 const Card = ({ nfts }) => {
     const [openTab, setOpenTab] = useState(true)
     const [field, setField] = useState("")
+    const [sort, setSort] = useState("")
     let nftFilter = nfts
     if (field !== "") {
         nftFilter = nfts.filter(nft => nft.collections === field)
+    }
+    if (sort !== "") {
+        if (sort === "priceUp") nftFilter = nftFilter.sort((a, b) => Number(a.price) - Number(b.price))
+        else if (sort === "priceDown") nftFilter = nftFilter.sort((a, b) => Number(b.price) - Number(a.price))
+        else if (sort === "date") nftFilter = nftFilter.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     }
     return (
         <div>
@@ -39,33 +44,18 @@ const Card = ({ nfts }) => {
                     openTab && (
                         <div className={Style.card_filter_box_items}>
                             <div className={Style.card_filter_box_items_box}>
-                                <div className={Style.card_filter_box_items_box_item}>
-                                    <FaWallet /> <span>10ETH</span>
-                                    <AiFillCloseCircle />
+                                <div className={`${Style.card_filter_box_items_box_item_trans} ${sort === "priceUp" ? Style.filter_btn_active : ""}`} onClick={() => setSort("priceUp")}>
+                                    <IoLogoUsd /> <small>Price asc</small> <AiOutlineArrowUp />
                                 </div>
                             </div>
                             <div className={Style.card_filter_box_items_box}>
-                                <div className={Style.card_filter_box_items_box_item_trans} onClick={() => setImage(!image)}>
-                                    <FaImages /> <small>Images</small>
-                                    <TiTick />
+                                <div className={`${Style.card_filter_box_items_box_item_trans} ${sort === "priceDown" ? Style.filter_btn_active : ""}`} onClick={() => setSort("priceDown")}>
+                                    <IoLogoUsd /> <small>Price desc</small> <AiOutlineArrowDown />
                                 </div>
                             </div>
                             <div className={Style.card_filter_box_items_box}>
-                                <div className={Style.card_filter_box_items_box_item_trans} onClick={() => setVideo(!video)}>
-                                    <FaVideo /> <small>Videos</small>
-                                    <TiTick />
-                                </div>
-                            </div>
-                            <div className={Style.card_filter_box_items_box}>
-                                <div className={Style.card_filter_box_items_box_item_trans} onClick={() => setMusic(!music)}>
-                                    <FaMusic /> <small>Music</small>
-                                    <TiTick />
-                                </div>
-                            </div>
-                            <div className={Style.card_filter_box_items_box}>
-                                <div className={Style.card_filter_box_items_box_item}>
-                                    <FaUserAlt /> <span>Verified</span>
-                                    <MdVerified />
+                                <div className={`${Style.card_filter_box_items_box_item_trans} ${sort === "date" ? Style.filter_btn_active : ""}`} onClick={() => setSort("date")}>
+                                    <BsFillCalendar2DateFill /> <small>Most recent</small>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +92,7 @@ const Card = ({ nfts }) => {
                                                 <p><FaEthereum />{el.price} ETH</p>
                                             </div>
                                             <div className={Style.card_box_update_details_price_box_stock}>
-                                                <small>61 in stock</small>
+                                                <small>#{el.tokenId}</small>
                                             </div>
                                         </div>
                                     </div>

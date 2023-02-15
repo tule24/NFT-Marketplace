@@ -19,7 +19,10 @@ const userSchema = new Schema({
         }
     },
     email: String,
-    description: String,
+    description: {
+        type: String,
+        default: "Something about yourself"
+    },
     role: {
         type: String,
         default: "user",

@@ -4,6 +4,7 @@ import { FcCameraAddon } from 'react-icons/fc'
 import Style from './HeroSection.module.css'
 import { Button } from '../index'
 import images from '../../img'
+import Image from 'next/image'
 
 const HeroSection = () => {
   return (
@@ -15,7 +16,7 @@ const HeroSection = () => {
           <Button btnName='Start your search' />
         </div>
         <div className={Style.heroSection_box_right}>
-          <img src="https://ipfs.io/ipfs/bafybeifsigvmactsur7vv734rlhhmagwkcqh22jvnqnkdznhcio2jznvsu/nft-image-3.png" alt="Hero section" className={Style.heroSection_img} />
+          <Image src={images.hero} alt="Hero section" className={Style.heroSection_img} />
         </div>
       </div>
     </div>

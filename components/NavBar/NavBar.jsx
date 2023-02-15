@@ -17,9 +17,8 @@ import { ToastContainer } from 'react-toastify'
 import { BiUser } from 'react-icons/bi'
 
 const NavBar = () => {
-  const [profile, setProfile] = useState(false)
   const [openSideMenu, setOpenSideMenu] = useState(false)
-  const { connectWallet, currentAccount, setTheme, theme, getNFTItem } = useContext(NFTMarketplaceContext)
+  const { connectWallet, currentAccount, setTheme, theme } = useContext(NFTMarketplaceContext)
 
   const openSideBar = () => {
     if (!openSideMenu) {
@@ -37,7 +36,6 @@ const NavBar = () => {
     }
   }
 
-  const [tokenId, setTokenId] = useState()
 
   return (
     <div className={Style.navbar}>
@@ -54,7 +52,6 @@ const NavBar = () => {
               <BsSearch className={Style.search_icon} />
             </div>
           </div>
-          <button onClick={() => getNFTItem(tokenId)}>GET NFT ITEM</button>
         </div>
         <div className={Style.navbar_container_right}>
           {/* DISCOVER MENU */}
@@ -74,7 +71,7 @@ const NavBar = () => {
           {/* CREATE BUTTON SECTION */}
           <div className={Style.navbar_container_right_button}>
             {currentAccount ? (
-              <Link href={{ pathname: 'uploadNFT' }}>
+              <Link href={{ pathname: 'createNFT' }}>
                 <Button btnName="Create" /></Link>
             ) : <Button btnName="Connect" handleClick={connectWallet} />}
           </div>
@@ -87,18 +84,14 @@ const NavBar = () => {
             </label>
           </div>
           {/* USER PROFILE */}
-          <div className={Style.navbar_container_right_profile_box}>
-            <div className={Style.navbar_container_right_profile}>
-              {currentAccount ? (
-                <div onClick={() => setProfile(!profile)} >
-                  <Blockies seed={currentAccount?.wallet.toLowerCase()} className={Style.navbar_container_right_profile} />
-                </div>
-              ) : (
-                <BiUser size={50} className={Style.profile_account_img} />
-              )
-              }
-              {profile && <Profile />}
-            </div>
+          <div className={Style.navbar_container_right_profile}>
+            <p>{currentAccount ? (
+              <Blockies seed={currentAccount?.wallet.toLowerCase()} className={Style.navbar_container_right_profile_ava} />
+            ) : (
+              <BiUser size={30} />
+            )
+            }</p>
+            <div className={Style.navbar_container_right_profile_box}><Profile /></div>
           </div>
           {/* MENU BUTTON */}
           <div className={Style.navbar_container_right_menuBtn}>

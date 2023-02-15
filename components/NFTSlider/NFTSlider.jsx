@@ -7,14 +7,7 @@ import NFTSliderCard from './NFTSliderCard/NFTSliderCard'
 const NFTSlider = () => {
     const [width, setWidth] = useState(0)
     const dragSlider = useRef()
-    const sliderArray = [
-        "https://www.youtube.com/watch?v=Cq73XqUra7I",
-        "https://www.youtube.com/watch?v=GgNNi1nTODw",
-        "https://www.youtube.com/watch?v=fQMiIaO3RWM",
-        "https://www.youtube.com/watch?v=ktZjf2CxFvE",
-        "https://www.youtube.com/watch?v=4NfUfq2u1KE",
-        "https://www.youtube.com/watch?v=NOjST7ny4oY"
-    ]
+    const sliderArray = [1,2,3,4,5,6]
 
     useEffect(() => {
         setWidth(dragSlider.current.scrollWidth - dragSlider.current.offsetWidth)
@@ -48,7 +41,7 @@ const NFTSlider = () => {
                 <motion.div className={Style.slider_box_itmes} ref={dragSlider}>
                     <motion.div className={Style.slider_box_item} drag="x" dragConstraints={{ right: 0, left: -width }}>
                         {sliderArray.map((el, i) => (
-                            <NFTSliderCard key={i} url={el} />
+                            <NFTSliderCard key={i} i={i}/>
                         ))}
                     </motion.div>
                 </motion.div>

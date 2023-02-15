@@ -57,17 +57,13 @@
     font-size: 20px;
 }
 
-.navbar_container_right_discover {
-    position: relative;
-    cursor: pointer;
-    font-weight: 600;
-}
-
 .navbar_container_right_discover:hover .navbar_container_right_discover_box {
     display: block;
 }
 
-.navbar_container_right_help {
+.navbar_container_right_help,
+.navbar_container_right_discover,
+.navbar_container_right_profile {
     position: relative;
     cursor: pointer;
     font-weight: 600;
@@ -83,7 +79,7 @@
 }
 
 .navbar_container_right_discover_box,
-.navbar_container_right_help_box {
+.navbar_container_right_help_box{
     position: absolute;
     padding: 1rem .5rem;
     box-shadow: var(--box-shadow);
@@ -121,16 +117,33 @@
     justify-content: center;
 }
 
-.navbar_container_right_profile_box {
-    position: relative;
-    cursor: pointer;
-    font-weight: 400;
-}
-
-.navbar_container_right_profile {
+.navbar_container_right_profile_ava {
     border-radius: 50%;
     display: flex;
     justify-content: center;
+}
+.navbar_container_right_profile > p {
+    margin-block: 1em;
+    margin-left: 1em;
+}
+.navbar_container_right_profile:hover .navbar_container_right_profile_box,
+.navbar_container_right_profile_box:hover{
+    display: block;
+}
+
+.navbar_container_right_profile_box {
+    position: absolute;
+    padding: 2rem .5rem;
+    box-shadow: var(--box-shadow);
+    font-size: 1rem;
+    width: 20rem;
+    border-radius: 1rem;
+
+    right: 0;
+    top: 5rem;
+    z-index: 222;
+    background-color: var(--main-bg-color);
+    display: none;
 }
 
 .navbar_container_right_menuBtn {

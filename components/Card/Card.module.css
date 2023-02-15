@@ -235,6 +235,7 @@
     transition: all .2s ease-in;
     font-size: 1.3rem;
     cursor: pointer;
+    background-color: var(--shadow-dark-color);
 }
 
 .card_filter_box_left button:hover
@@ -296,6 +297,15 @@
     display: flex;
     align-items: center;
     gap: .5rem;
+}
+
+.card_filter_box_items_box_item_trans:hover {
+    background-color: var(--shadow-dark-color);
+}
+
+.filter_btn_active {
+    box-shadow: var(--box-shadow);
+    background-color: var(--shadow-dark-color);
 }
 
 @media screen and (min-device-width: 426px) and (max-device-width: 768px) {

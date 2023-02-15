@@ -11,9 +11,15 @@ const author = () => {
   return (
     <div className={Style.banner}>
       <Banner bannerImg={images.creatorbackground2} />
-      <AuthorProfileCard />
-      <AuthorTaps setAuthorTab={setAuthorTab} />
-      <AuthorNFTCardBox authorTab={authorTab} nfts={nfts} currentAccount={currentAccount} />
+      {currentAccount ? (
+        <div>
+          <AuthorProfileCard />
+          <AuthorTaps setAuthorTab={setAuthorTab} />
+          <AuthorNFTCardBox authorTab={authorTab} nfts={nfts} currentAccount={currentAccount} />
+        </div>
+      ): (
+        <div className={Style.not_connect}><h1>Please connect your wallet to view your profile</h1></div>
+      )}
     </div>
   )
 }

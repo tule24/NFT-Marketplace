@@ -91,11 +91,12 @@ const NftDescription = () => {
             <div className={Style.nftDescription_box_profile_bidding_price}>
               <div className={Style.nftDescription_box_profile_bidding_price_bid}>
                 <small>Price </small>
-                <p><span style={{color: "yellow"}}>{nftDetail?.price}</span>ETH <span>(≈ {usd !== 0 ? usd : ''}  usd)</span></p>
+                <p><span style={{ color: "yellow" }}>{nftDetail?.price}</span>ETH <span>(≈ {usd !== 0 ? usd : ''}  usd)</span></p>
               </div>
             </div>
             <div className={Style.nftDescription_box_profile_bidding_btn}>
-              {nftDetail && nftDetail.owner !== currentAccount.wallet && <Button btnName="Buy NFT" icon={<FaWallet />} handleClick={() => buyNFT(nftDetail)} classStyle={Style.button} />}
+              {nftDetail && nftDetail.owner !== currentAccount.wallet && nftDetail.listing && <Button btnName="Buy NFT" icon={<FaWallet />} handleClick={() => buyNFT(nftDetail)} classStyle={Style.button} />}
+              {nftDetail && !nftDetail.listing && <Button btnName="Not for sell" icon={<FaWallet />} handleClick={() => { }} classStyle={Style.button} />}
               {/* <Button btnName="Make offer" icon={<FaPercentage />} handleClick={() => { }} classStyle={Style.button} /> */}
             </div>
             <div className={Style.nftDescription_box_profile_bidding_tabs}>
