@@ -2,8 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { FcConferenceCall, FcCollaboration, FcSportsMode } from 'react-icons/fc'
 // INTERNAL IMPORT
-import Style from '../styles/AboutUs.module.css'
-import { Brand } from '../components'
+import Style from '@/styles/AboutUs.module.css'
 import images from '../img'
 const aboutUs = () => {
     const founderArr = [

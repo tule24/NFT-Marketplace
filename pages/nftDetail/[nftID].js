@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 // INTERNAL IMPORT
-import Style from '../../styles/NftDetail.module.css'
-import { Brand } from '../../components'
 import NftDetailPage from '../../nftDetailComps/NftDetailPage'
 import { NFTMarketplaceContext } from 'Context/NFTMarketplaceContext'
+import { Brand } from '@/components/Home'
 const nftDetail = () => {
   const { getNFTDetail } = useContext(NFTMarketplaceContext)
   const router = useRouter()
@@ -16,7 +15,7 @@ const nftDetail = () => {
   return (
     <div>
       <NftDetailPage />
-      {/* <Brand /> */}
+      <Brand />
     </div>
   )
 }

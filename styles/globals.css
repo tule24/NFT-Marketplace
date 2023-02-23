@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-[data-theme='dark']{
+[data-theme='light']{
   --icons-color: #4c5773;
   --icons-light-color: #4c577341;
   --icons-bg-color: #e2e6e9;
@@ -12,7 +12,7 @@
   --box-shadow-2: 0rem 0rem 0rem var(--shadow-dark-color), -.3rem -.3rem 1rem var(--shadow-dark-color);
 }
 
-[data-theme='light'] {
+[data-theme='dark'] {
   --icons-color: #eee;
   --icons-light-color: #eee57;
   --icons-bg-color: #eee;

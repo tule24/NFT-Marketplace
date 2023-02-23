@@ -1,10 +1,8 @@
 import React, { useCallback, useState } from 'react'
 import Image from 'next/image'
-import { useDropzone } from 'react-dropzone'
 // INTERNAL IMPORT
-import Style from '../styles/Account.module.css'
-import images from '../img'
-import { AccountForm } from '../accountComps'
+import Style from '@/styles/Account.module.css'
+import { AccountForm } from '@/components/Account'
 const account = () => {
   return (
     <div className={Style.account}>

@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 // INTERNAL IMPORT
-import Style from '../styles/Author.module.css'
-import { Banner } from '../collectionComps'
-import { AuthorTaps, AuthorProfileCard, AuthorNFTCardBox } from '../authorComps'
-import { NFTMarketplaceContext } from 'Context/NFTMarketplaceContext'
+import Style from '@/styles/Author.module.css'
+import { Banner } from '@/components/Collection'
+import { AuthorTaps, AuthorProfileCard, AuthorNFTCardBox } from '@/components/Author'
+import { NFTMarketplaceContext } from '@/Context/NFTMarketplaceContext'
 import images from '../img'
 const author = () => {
   const { nfts, currentAccount } = useContext(NFTMarketplaceContext)

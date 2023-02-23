@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 // INTERNAL IMPORT
 import Style from '../styles/Home.module.css'
-import { HeroSection, Service, BigNFTSlider, Title, NFTCard, Follower, AudioLive, NFTSlider, Brand, Video } from '../components'
-import { NFTMarketplaceContext } from 'Context/NFTMarketplaceContext'
+import { HeroSection, Service, BigNFTSlider, Title, NFTCard, Follower, AudioLive, NFTSlider, Brand, Video } from '@/components/Home'
+import { NFTMarketplaceContext } from '@/Context/NFTMarketplaceContext'
 
 const Home = () => {
   const { nfts } = useContext(NFTMarketplaceContext)

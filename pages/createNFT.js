@@ -1,7 +1,7 @@
 import React from 'react'
 // INTERNAL IMPORT
-import Style from '../styles/UploadNFT.module.css'
-import { UploadNFT } from '../uploadNFTComps'
+import Style from '@/styles/UploadNFT.module.css'
+import { UploadNFT } from '@/components/UploadNFT'
 const uploadNFT = () => {
   return (
     <div className={Style.uploadNFT}>

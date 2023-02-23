@@ -305,6 +305,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
             console.log(error)
         }
     }
+    
     useEffect(() => {
         checkWalletConnected()
         window.ethereum.on('accountsChanged', handleAccountChange)

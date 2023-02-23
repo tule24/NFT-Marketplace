@@ -1,7 +1,7 @@
 import React from 'react'
 // INTERNAL IMPORT
-import Style from '../styles/Subscription.module.css'
-import Subscription from '../subscriptionComps/Subscription'
+import Style from '@/styles/Subscription.module.css'
+import Subscription from '@/components/Subscription/Subscription'
 const subscription = () => {
     const subscriptionArray = [
         {

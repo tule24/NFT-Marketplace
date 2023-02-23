@@ -3,9 +3,9 @@ import { TiSocialFacebook, TiSocialTwitter, TiSocialYoutube, TiSocialInstagram }
 import { BiMap, BiEnvelope, BiPhone, BiHappyAlt } from 'react-icons/bi'
 import { HiOutlineMail } from 'react-icons/hi'
 // INTERNAL IMPORT
-import Style from '../styles/Contact.module.css'
-import formStyle from '../accountComps/AccountForm/AccountForm.module.css'
-import { Button } from '../components'
+import Style from '@/styles/Contact.module.css'
+import formStyle from '@/components/Account/AccountForm/AccountForm.module.css'
+import { Button } from '@/components/Home'
 const contact = () => {
     return (
         <div className={Style.contact}>
