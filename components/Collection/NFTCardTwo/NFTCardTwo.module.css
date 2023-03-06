@@ -160,6 +160,7 @@
     transition: all .2s ease-in;
     font-size: 1.3rem;
     cursor: pointer;
+    background-color: var(--shadow-dark-color);
 }
 
 .card_filter_box_left button:hover {

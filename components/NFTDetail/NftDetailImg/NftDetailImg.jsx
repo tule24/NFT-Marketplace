@@ -16,7 +16,7 @@ const NftDetailImg = () => {
         <div className={Style.nftDetailImg_box_nft}>
           <div className={Style.nftDetailImg_box_nft_like}>
             <BsImages className={Style.nftDetailImg_box_nft_like_icon} />
-            <p onClick={() => setLike(!like)}>
+            <p onClick={() => {}}>
               <AiFillHeart className={Style.nftDetailImg_box_nft_like_icon} />{""}
               <span>{nftDetail?.like}</span>
             </p>

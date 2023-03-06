@@ -115,7 +115,7 @@ const NavBar = () => {
           </div>
         )
       }
-      <ToastContainer closeButton={true} theme={theme} position='top-center' style={{ width: "max-content" }} />
+      <ToastContainer closeButton={true} theme={'dark'} position='top-center' style={{ width: "max-content" }} />
     </div>
   )
 }
