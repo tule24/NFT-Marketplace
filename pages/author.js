@@ -10,7 +10,7 @@ const author = () => {
   const [authorTab, setAuthorTab] = useState("All NFTs")
   return (
     <div className={Style.banner}>
-      <Banner bannerImg={images.creatorbackground2} />
+      <Banner bannerImg={images.creatorbackground3} />
       {currentAccount ? (
         <div>
           <AuthorProfileCard />

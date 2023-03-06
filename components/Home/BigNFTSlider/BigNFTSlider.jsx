@@ -10,6 +10,8 @@ import Style from './BigNFTSlider.module.css'
 import { Button } from '../index'
 import { minifyAddress } from '@/helpers'
 import Blockies from 'react-blockies'
+import Link from 'next/link'
+import { GoUnverified, GoVerified } from 'react-icons/go'
 
 const BigNFTSlider = ({ nfts }) => {
     const [idNumber, setIdNumber] = useState(0);
@@ -29,7 +31,7 @@ const BigNFTSlider = ({ nfts }) => {
                     <h2>{nfts[idNumber]?.name}</h2>
                     <div className={Style.bigNFTSlider_box_left_creator}>
                         <div className={Style.bigNFTSlider_box_left_creator_profile}>
-                            <Blockies seed={nfts[idNumber]?.owner.toLowerCase()} className={Style.bigNFTSlider_box_left_creator_profile_ava} />
+                            <Blockies seed={nfts[idNumber]?.owner.toLowerCase() || "0x1BfC7c4Bce1DB93Ea3F48BFC52A6a7fccc770D3B"} className={Style.bigNFTSlider_box_left_creator_profile_ava} />
                             <div className={Style.bigNFTSlider_box_left_creator_profile_info}>
                                 <p>Creator</p>
                                 <h3>{nfts[idNumber]?.owner && minifyAddress(nfts[idNumber]?.owner)} <span><MdVerified color='green' /></span></h3>
@@ -50,7 +52,7 @@ const BigNFTSlider = ({ nfts }) => {
                         </div>
                         <p className={Style.bigNFTSlider_box_left_bidding_auction}>
                             <MdTimer className={Style.bigNFTSlider_box_left_bidding_auction_icon} />
-                            <span>Auction ending in</span>
+                            <span>Auction ending in (coming soon)</span>
                         </p>
                         <div className={Style.bigNFTSlider_box_left_bidding_timer}>
                             <div className={Style.bigNFTSlider_box_left_bidding_timer_item}>
@@ -71,8 +73,12 @@ const BigNFTSlider = ({ nfts }) => {
                             </div>
                         </div>
                         <div className={Style.bigNFTSlider_box_left_button}>
-                            <Button btnName="Place" handleClick={() => { }} />
-                            <Button btnName="View" handleClick={() => { }} />
+                            <Link href={`nftDetail/${nfts[idNumber]?._id}`}>
+                                <Button btnName="Place" handleClick={() => { }} />
+                            </Link>
+                            <Link href={`nftDetail/${nfts[idNumber]?._id}`}>
+                                <Button btnName="View" handleClick={() => { }} />
+                            </Link>
                         </div>
                     </div>
                     <div className={Style.bigNFTSlider_box_left_sliderBtn}>
@@ -84,8 +90,8 @@ const BigNFTSlider = ({ nfts }) => {
                     <div className={Style.bigNFTSlider_box_right_box}>
                         <img src={nfts[idNumber]?.image} alt="NFT image" className={Style.bigNFTSlider_box_right_box_img} />
                         <div className={Style.bigNFTSlider_box_right_box_like}>
-                            <FcLike />
-                            <span>{idNumber * 5}</span>
+                            {nfts[idNumber]?.listing ? <><GoVerified color='green' /> {""} Listing</>
+                                : <><GoUnverified color='orange' /> {""} Unlisting</>}
                         </div>
                     </div>
                 </div>

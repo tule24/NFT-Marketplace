@@ -2,7 +2,7 @@ import collection from "./collection.png";
 import creatorbackground1 from "./creatorbackground-1.jpeg";
 import creatorbackground2 from "./creatorbackground-2.jpeg";
 import creatorbackground3 from "./creatorbackground-3.jpeg";
-import creatorbackground4 from "./creatorbackground-4.jpg";
+import creatorbackground4 from "./creatorbackground-4.jpeg";
 import creatorbackground5 from "./creatorbackground-5.jpg";
 import creatorbackground6 from "./creatorbackground-6.jpg";
 import creatorbackground7 from "./creatorbackground-7.jpg";

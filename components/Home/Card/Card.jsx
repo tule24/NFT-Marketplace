@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { AiFillHeart, AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
+import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
 import { FaEthereum } from 'react-icons/fa'
 import { BsImages, BsFillCalendar2DateFill } from 'react-icons/bs'
 import { FaFilter, FaAngleDown, FaAngleUp } from 'react-icons/fa'
+import { GoVerified, GoUnverified } from 'react-icons/go'
 import { IoLogoUsd } from 'react-icons/io'
 import Link from 'next/link'
 //INTERNAL IMPORT
@@ -71,9 +72,12 @@ const Card = ({ nfts }) => {
                             </div>
                             <div className={Style.card_box_update}>
                                 <div className={Style.card_box_update_left}>
-                                    <div className={Style.card_box_update_left_like}>
-                                        <AiFillHeart color='red' /> {""} {el.like}
+                                    {el.listing ? <div className={Style.card_box_update_left_like}>
+                                        <GoVerified color='green' /> {""} Listing
                                     </div>
+                                        : <div className={Style.card_box_update_left_like}>
+                                            <GoUnverified color='orange' /> {""} Unlisting
+                                        </div>}
                                 </div>
                                 <div className={Style.card_box_update_right}>
                                     <div className={Style.card_box_update_right_info}>

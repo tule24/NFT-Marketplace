@@ -91,7 +91,7 @@ const NftDescription = () => {
             <div className={Style.nftDescription_box_profile_bidding_price}>
               <div className={Style.nftDescription_box_profile_bidding_price_bid}>
                 <small>Price </small>
-                <p><span style={{ color: "yellow" }}>{nftDetail?.price}</span>ETH <span>(≈ {usd !== 0 ? usd : ''}  usd)</span></p>
+                <p><span style={{ color: "green" }}>{nftDetail?.price}</span>ETH <span>(≈ {usd !== 0 ? usd : ''}  usd)</span></p>
               </div>
             </div>
             <div className={Style.nftDescription_box_profile_bidding_btn}>

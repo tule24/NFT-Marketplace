@@ -42,7 +42,6 @@
 .NFTCardTwo_box_like_box_box p {
     display: flex;
     align-items: center;
-    gap: 1rem;
     font-size: 1.2rem;
     background-color: var(--icons-color);
     color: var(--main-bg-color);

@@ -16,6 +16,9 @@
     box-shadow: var(--box-shadow);
 }
 
+.audioPlayer_box_info {
+    color: black;
+}
 .audioPlayer_box_info_box {
     display: flex;
     gap: 1rem;
@@ -26,6 +29,7 @@
 }
 
 .audioPlayer_box_info_box_price {
+    color: black;
     border: 1px solid black;
     font-size: .8rem;
     font-weight: 600;

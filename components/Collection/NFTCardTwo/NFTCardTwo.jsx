@@ -8,6 +8,7 @@ import { IoLogoUsd } from 'react-icons/io'
 import Style from './NFTCardTwo.module.css'
 import { LikeProfile } from '@/components/Home'
 import Link from 'next/link'
+import { GoUnverified, GoVerified } from 'react-icons/go'
 const NFTCardTwo = ({ nfts }) => {
     const [openTab, setOpenTab] = useState(true)
     const [field, setField] = useState("")
@@ -71,7 +72,8 @@ const NFTCardTwo = ({ nfts }) => {
                                     <div className={Style.NFTCardTwo_box_like_box_box}>
                                         <BsImage className={Style.NFTCardTwo_box_like_box_box} />
                                         <p>
-                                            <AiFillHeart />{""} {el.like}
+                                            {el.listing ? <><GoVerified color='green' />Listing</>
+                                                : <><GoUnverified color='orange' />Unlisting</>}
                                         </p>
                                     </div>
                                 </div>

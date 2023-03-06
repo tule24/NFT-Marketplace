@@ -17,7 +17,7 @@ const Profile = () => {
     <div className={Style.profile}>
       {currentAccount ? (
         <div className={Style.profile_account}>
-          <Blockies seed={currentAccount.wallet.toLowerCase()} className={Style.profile_account_img} />
+          <Blockies seed={currentAccount?.wallet.toLowerCase()} className={Style.profile_account_img} />
           <div className={Style.profile_account_info}>
             <p>{currentAccount.name}</p>
             <small>{miniAddress}</small>

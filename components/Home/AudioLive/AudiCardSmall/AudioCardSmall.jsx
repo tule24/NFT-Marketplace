@@ -11,7 +11,7 @@ const AudioCardSmall = () => {
   return (
     <div className={Style.audioPlayer}>
       <div className={Style.audioPlayer_box}>
-        <Image src={images.creatorbackground1} alt='music' width={100} height={100} className={Style.audioPlayer_box_img} />
+        <Image src={images.creatorbackground11} alt='music' width={100} height={100} className={Style.audioPlayer_box_img} />
         <div className={Style.audioPlayer_box_info}>
           <h4>NFT music #1123</h4>
           <div className={Style.audioPlayer_box_info_box}>
