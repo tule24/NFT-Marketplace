@@ -94,11 +94,11 @@ const NftDescription = () => {
                 <p><span style={{ color: "green" }}>{nftDetail?.price}</span>ETH <span>(≈ {usd !== 0 ? usd : ''}  usd)</span></p>
               </div>
             </div>
-            <div className={Style.nftDescription_box_profile_bidding_btn}>
-              {nftDetail && nftDetail.owner !== currentAccount.wallet && nftDetail.listing && <Button btnName="Buy NFT" icon={<FaWallet />} handleClick={() => buyNFT(nftDetail)} classStyle={Style.button} />}
+            {currentAccount && <div className={Style.nftDescription_box_profile_bidding_btn}>
+              {nftDetail && nftDetail.owner !== currentAccount?.wallet && nftDetail.listing && <Button btnName="Buy NFT" icon={<FaWallet />} handleClick={() => buyNFT(nftDetail)} classStyle={Style.button} />}
               {nftDetail && !nftDetail.listing && <Button btnName="Not for sell" icon={<FaWallet />} handleClick={() => { }} classStyle={Style.button} />}
               {/* <Button btnName="Make offer" icon={<FaPercentage />} handleClick={() => { }} classStyle={Style.button} /> */}
-            </div>
+            </div>}
             <div className={Style.nftDescription_box_profile_bidding_tabs}>
               <button onClick={() => setTab('history')}>Bid History</button>
               <button onClick={() => setTab('provanance')}>Provanance</button>
