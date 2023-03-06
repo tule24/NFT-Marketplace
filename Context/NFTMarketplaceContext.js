@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 
 // FETCH SMART CONTRACT
 const fetchContract = (signerOrProvider) => new ethers.Contract(process.env.NEXT_PUBLIC_NFT_MARKET_ADDRESS, NFTMarketplaceABI, signerOrProvider)
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 export const NFTMarketplaceContext = React.createContext()
 export const NFTMarketplaceProvider = (({ children }) => {
     const route = useRouter()
@@ -99,7 +99,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
                 let { data: { image } } = await axios.get(uri)
                 image = ipfsToHTTPS(image)
                 const { name, description, collections } = nftData
-                await axios.post('/api/nft', { tokenId, name, description, image, owner: currentAccount.wallet, collections, uri })
+                await axios.post(`${BASE_URL}/api/nft`, { tokenId, name, description, image, owner: currentAccount.wallet, collections, uri })
                 await getALLNFT()
                 toast.success(`😁 A NFT was minted with a token ID of ${tokenId} 😁`)
             }
@@ -117,7 +117,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
             const contract = fetchContract(signer)
             const transaction = await contract.listNftItem(tokenID, wei, { value: ethers.utils.parseEther("0.0015") })
             await transaction.wait()
-            const res = await axios.patch(`/api/nft/${id}`, { listing: true, price })
+            const res = await axios.patch(`${BASE_URL}/api/nft/${id}`, { listing: true, price })
             if (res.status === 200) {
                 setNfts(res.data.data)
             }
@@ -136,7 +136,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
             const contract = fetchContract(signer)
             const transaction = await contract.unlistNftItem(tokenID)
             await transaction.wait()
-            const res = await axios.patch(`/api/nft/${id}`, { listing: false })
+            const res = await axios.patch(`${BASE_URL}/api/nft/${id}`, { listing: false })
             if (res.status === 200) {
                 setNfts(res.data.data)
             }
@@ -157,7 +157,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
             const wei = ethers.utils.parseEther(price);
             const transaction = await contract.updateItemPrice(tokenID, wei)
             await transaction.wait()
-            const res = await axios.patch(`/api/nft/${id}`, { price: price })
+            const res = await axios.patch(`${BASE_URL}/api/nft/${id}`, { price: price })
             if (res.status === 200) {
                 setNfts(res.data.data)
             }
@@ -178,7 +178,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
             const contract = fetchContract(signer)
             const transaction = await contract.buyNftItem(tokenId, { value: ethers.utils.parseEther(String(price)) })
             await transaction.wait()
-            const res = await axios.patch(`/api/nft/${_id}`, { owner: currentAccount.wallet, listing: false })
+            const res = await axios.patch(`${BASE_URL}/api/nft/${_id}`, { owner: currentAccount.wallet, listing: false })
             if (res.status === 200) {
                 setNfts(res.data.data)
             }
@@ -269,7 +269,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
     // get all nft
     const getALLNFT = async () => {
         try {
-            const response = await axios.get("/api/nft");
+            const response = await axios.get(`${BASE_URL}/api/nft`);
             if (response.status === 200) {
                 setNfts(response.data.data)
             }
@@ -286,7 +286,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
                 name,
                 wallet
             }
-            const res = await axios.post('/api/user', data)
+            const res = await axios.post(`${BASE_URL}/api/user`, data)
             if (res.status <= 201) {
                 const data = res.data.data
                 setCurrentAccount(data)
@@ -299,7 +299,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
     // update user
     const updateUser = async (userUpdate) => {
         try {
-            const res = await axios.patch(`/api/user/${currentAccount._id}`, userUpdate)
+            const res = await axios.patch(`${BASE_URL}/api/user/${currentAccount._id}`, userUpdate)
             if (res.status <= 200) {
                 const data = res.data.data
                 setCurrentAccount(data)
@@ -312,7 +312,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
     // get a NFT
     const getNFTDetail = async (nftID) => {
         try {
-            const res = await axios.get(`/api/nft/${nftID}`)
+            const res = await axios.get(`${BASE_URL}/api/nft/${nftID}`)
             if (res.status === 200) {
                 const data = res.data.data[0]
                 setNftDetail(data)
