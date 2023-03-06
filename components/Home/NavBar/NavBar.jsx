@@ -18,7 +18,7 @@ import { BiUser } from 'react-icons/bi'
 
 const NavBar = () => {
   const [openSideMenu, setOpenSideMenu] = useState(false)
-  const { connectWallet, currentAccount, setTheme, theme } = useContext(NFTMarketplaceContext)
+  const { connectWallet, currentAccount, setTheme, theme, getNFTItem } = useContext(NFTMarketplaceContext)
 
   const openSideBar = () => {
     if (!openSideMenu) {
@@ -53,6 +53,7 @@ const NavBar = () => {
             </div>
           </div>
         </div>
+        {/* <button onClick={() => getNFTItem(8)}>test</button> */}
         <div className={Style.navbar_container_right}>
           {/* DISCOVER MENU */}
           <div className={Style.navbar_container_right_discover}>
@@ -71,7 +72,7 @@ const NavBar = () => {
           {/* CREATE BUTTON SECTION */}
           <div className={Style.navbar_container_right_button}>
             {currentAccount ? (
-              <Link href={{ pathname: 'createNFT' }}>
+              <Link href={{ pathname: '/createNFT' }}>
                 <Button btnName="Create" /></Link>
             ) : <Button btnName="Connect" handleClick={connectWallet} />}
           </div>

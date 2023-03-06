@@ -64,7 +64,7 @@ const NFTCardTwo = ({ nfts }) => {
             </div>
             <div className={Style.NFTCardTwo}>
                 {nftFilter.map((el, i) => (
-                    <Link href={`nftDetail/${el._id}`} key={i}>
+                    <Link href={{ pathname: `/nftDetail/${el._id}` }} key={i}>
                         <div className={Style.NFTCardTwo_box}>
                             <div className={Style.NFTCardTwo_box_like}>
                                 <div className={Style.NFTCardTwo_box_like_box}>

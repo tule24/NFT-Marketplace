@@ -7,12 +7,14 @@ import { toast } from 'react-toastify'
 import { NFTMarketplaceABI } from './constants'
 import { ipfsToHTTPS } from '../helpers'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 // FETCH SMART CONTRACT
 const fetchContract = (signerOrProvider) => new ethers.Contract(process.env.NEXT_PUBLIC_NFT_MARKET_ADDRESS, NFTMarketplaceABI, signerOrProvider)
 
 export const NFTMarketplaceContext = React.createContext()
 export const NFTMarketplaceProvider = (({ children }) => {
+    const route = useRouter()
     const [currentAccount, setCurrentAccount] = useState(null)
     const [signer, setSigner] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -30,6 +32,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
             const provider = new ethers.providers.Web3Provider(connection)
             const signer = provider.getSigner()
             setSigner(signer)
+            await getALLNFT()
         } else {
             console.log("No account found")
         }
@@ -180,6 +183,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
                 setNfts(res.data.data)
             }
             setLoading(false)
+            route.push('/author')
             toast(`😁 A NFT with the token ID ${tokenId} was sold at price of ${price} ETH 😁`)
         } catch (e) {
             console.log(e)
@@ -201,17 +205,29 @@ export const NFTMarketplaceProvider = (({ children }) => {
     //     }
     // }
     // get NFT by tokenID
-    // const getNFTItem = async (_tokenID) => {
-    //     try {
-    //         const contract = fetchContract(provider);
-    //         const nft = await contract.getNFTItem(_tokenID)
-    //         // const res = await formatData(contract, nft)
-    //         console.log(nft)
-    //         // return nft
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
+    const getNFTItem = async (_tokenID) => {
+        try {
+            const contract = fetchContract(provider);
+            const nft = await contract.getNFTItem(_tokenID)
+            // const res = await formatData(contract, nft)
+            console.log(nft)
+            // return nft
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const uriItem = async (_tokenID) => {
+        try {
+            const contract = fetchContract(provider);
+            const nft = await contract.tokenURI(_tokenID)
+            // const res = await formatData(contract, nft)
+            console.log(nft)
+            // return nft
+        } catch (e) {
+            console.log(e)
+        }
+    }
     // // get all NFT was listed
     // const getAllNFTItem = async () => {
     //     try {
@@ -305,7 +321,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
             console.log(error)
         }
     }
-    
+
     useEffect(() => {
         checkWalletConnected()
         window.ethereum.on('accountsChanged', handleAccountChange)
@@ -330,6 +346,7 @@ export const NFTMarketplaceProvider = (({ children }) => {
                 updatePriceNFT,
                 buyNFT,
                 getNFTDetail,
+                getNFTItem
             }}>
             {children}
         </NFTMarketplaceContext.Provider>

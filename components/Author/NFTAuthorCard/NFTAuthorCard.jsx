@@ -10,21 +10,12 @@ const NFTAuthorCard = ({ nfts }) => {
     const { listNFT, unlistNFT, updatePriceNFT } = useContext(NFTMarketplaceContext)
     const [openModal, setOpenModal] = useState(false)
     const [option, setOption] = useState("")
+    const [nft, setNft] = useState(null)
     return (
         <div className={Style.NFTAuthorCard}>
             {
                 nfts.map((el, i) => (
                     <div className={Style.NFTAuthorCard_box} key={i}>
-                        <div className={Style.NFTAuthorCard_box_like}>
-                            <div className={Style.NFTAuthorCard_box_like_box}>
-                                <div className={Style.NFTAuthorCard_box_like_box_box}>
-                                    <BsImage className={Style.NFTAuthorCard_box_like_box_box} />
-                                    <p>
-                                        <AiFillHeart color='red' />{""} {el?.like}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                         <div className={Style.NFTAuthorCard_box_img}>
                             <img src={el?.image} alt="NFT" className={Style.NFTAuthorCard_box_img_img} />
                         </div>
@@ -45,14 +36,14 @@ const NFTAuthorCard = ({ nfts }) => {
                         <div className={Style.NFTAuthorCard_box_button}>
                             {el?.listing ? (
                                 <div className={Style.NFTAuthorCard_box_button_listing}>
-                                    <button className={Style.NFTAuthorCard_box_btn} onClick={() => {setOption("unlist") ; setOpenModal(true)}}>Unlist NFT</button>
-                                    <button className={Style.NFTAuthorCard_box_btn} onClick={() => {setOption("price") ; setOpenModal(true)}}>Update Price</button>
+                                    <button className={Style.NFTAuthorCard_box_btn} onClick={() => { setOption("unlist"); setNft(el); setOpenModal(true) }}>Unlist NFT</button>
+                                    <button className={Style.NFTAuthorCard_box_btn} onClick={() => { setOption("price"); setNft(el); setOpenModal(true) }}>Update Price</button>
                                 </div>
                             ) : (
-                                <button className={Style.NFTAuthorCard_box_btn} onClick={() => {setOption("list") ; setOpenModal(true)}}>List NFT</button>
+                                <button className={Style.NFTAuthorCard_box_btn} onClick={() => { setOption("list"); setNft(el); setOpenModal(true) }}>List NFT</button>
                             )}
                         </div>
-                        {openModal && <ModalPrice nft={el} setOpenModal={setOpenModal} option={option} listNFT={listNFT} unlistNFT={unlistNFT} updatePriceNFT={updatePriceNFT}/>}
+                        {openModal && <ModalPrice nft={nft} setOpenModal={setOpenModal} option={option} listNFT={listNFT} unlistNFT={unlistNFT} updatePriceNFT={updatePriceNFT} />}
                     </div>
                 ))
             }

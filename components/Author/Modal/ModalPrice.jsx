@@ -17,7 +17,7 @@ const ModalPrice = ({ nft, setOpenModal, option, listNFT, unlistNFT, updatePrice
                     {option === "list" && <p>*Note: The listing fee is 0.0015 ETH, make sure you have adequate ETH to list NFT</p>}
                     {option !== "unlist" && <div className={Style.modalPrice_input} ><input type="number" defaultValue={0.01} step={0.01} min={0.01} onChange={(e) => setPrice(e.target.value)} /><span>&nbsp; ETH</span></div>}
 
-                    {option === "list" && <button onClick={() => { listNFT(nft._id, nft.tokenId, price); setOpenModal(false); }} className={Style.modalPrice_btn} >List NFT</button>}
+                    {option === "list" && <button onClick={() => { console.log(nft); listNFT(nft._id, nft.tokenId, price); setOpenModal(false); }} className={Style.modalPrice_btn} >List NFT</button>}
                     {option === "unlist" && <button onClick={() => { unlistNFT(nft._id, nft.tokenId); setOpenModal(false); }} className={Style.modalPrice_btn} >Unlist NFT</button>}
                     {option === "price" && <button onClick={() => { updatePriceNFT(nft._id, nft.tokenId, price); setOpenModal(false); }} className={Style.modalPrice_btn} >Update Price NFT</button>}
                 </div>

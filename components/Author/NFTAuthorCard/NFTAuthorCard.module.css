@@ -137,7 +137,7 @@
 }
 
 .NFTAuthorCard_box_btn:hover {
-    background-color: rgb(223, 89, 223);
+    background-color: rgba(0,0,0,.5);
     color: var(--icons-color);
 }
 

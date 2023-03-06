@@ -10,7 +10,7 @@ const Home = () => {
     <div className={Style.homePage}>
       <HeroSection />
       <Service />
-      <BigNFTSlider />
+      <BigNFTSlider nfts={nfts} />
       <Title heading="Audio Collection" paragraph="Discover the most outstanding NFTs in all topics of life." />
       <AudioLive />
       <Follower />
